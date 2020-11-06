@@ -2,7 +2,35 @@
 app.controller('typeTemplateController' ,function($scope,$controller,typeTemplateService,brandService,specificationService){
 	
 	$controller('baseController',{$scope:$scope}); //继承
-	
+
+/*	private Long id;
+
+	private String name;
+
+	private String specIds;
+
+	private String brandIds;
+
+	private String customAttributeItems;*/
+
+	$scope.entity={
+		id:{},
+		name:{},
+		specIds:{},
+		brandIds:{},
+		customAttributeItems:[]
+	};
+
+	$scope.deleteTableRow=function(index){
+		$scope.entity.customAttributeItems.splice(index,1);
+
+	}
+
+	$scope.addTableRow=function(){
+		$scope.entity.customAttributeItems.push({}); //添加一个规格选项对象到数组中
+	}
+
+
     //读取列表数据绑定到表单中  
 	$scope.findAll=function(){
 		typeTemplateService.findAll().success(
@@ -10,13 +38,22 @@ app.controller('typeTemplateController' ,function($scope,$controller,typeTemplat
 				$scope.list=response;
 			}			
 		);
-	}    
+	}
+
+	//json字符串转换为固定格式字符串
+
+	$scope.formatChange=function(list){
+		for(var item in list){
+
+		}
+	}
 	
 	//分页
 	$scope.findPage=function(page,rows){			
 		typeTemplateService.findPage(page,rows).success(
 			function(response){
-				$scope.list=response.rows;	
+				$scope.list=response.rows;
+				//this.formatChange(response.rows);
 				$scope.paginationConf.totalItems=response.total;//更新总记录数
 			}			
 		);
@@ -26,7 +63,10 @@ app.controller('typeTemplateController' ,function($scope,$controller,typeTemplat
 	$scope.findOne=function(id){				
 		typeTemplateService.findOne(id).success(
 			function(response){
-				$scope.entity= response;					
+				$scope.entity= response;
+				$scope.entity.specIds=JSON.parse(response.specIds)
+				$scope.entity.brandIds=JSON.parse(response.brandIds)
+				$scope.entity.customAttributeItems=JSON.parse(response.customAttributeItems)
 			}
 		);				
 	}
@@ -80,6 +120,7 @@ app.controller('typeTemplateController' ,function($scope,$controller,typeTemplat
 		brandService.findBrandOption().success(function (response) {
 			$scope.brandList={data:response};
 		})
+		this.findSpecificOption();
 	}
 
 	$scope.findSpecificOption=function () {
