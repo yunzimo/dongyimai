@@ -1,62 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.offcn.AppTest" time="0.033" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.offcn.AppTest" time="0.08" tests="1" errors="0" skipped="0" failures="0">
   <properties>
-    <property name="awt.toolkit" value="sun.awt.X11.XToolkit"/>
+    <property name="sun.desktop" value="windows"/>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
     <property name="file.encoding.pkg" value="sun.io"/>
     <property name="java.specification.version" value="1.8"/>
-    <property name="sun.cpu.isalist" value=""/>
-    <property name="sun.jnu.encoding" value="UTF-8"/>
-    <property name="java.class.path" value="/home/yunzimo/IdeaProjects/dongyimai-parent/dongyimai-dao/target/test-classes:/home/yunzimo/IdeaProjects/dongyimai-parent/dongyimai-dao/target/classes:/home/yunzimo/javaproject/mavenlocalresp/org/springframework/spring-context/4.2.4.RELEASE/spring-context-4.2.4.RELEASE.jar:/home/yunzimo/javaproject/mavenlocalresp/org/springframework/spring-aop/4.2.4.RELEASE/spring-aop-4.2.4.RELEASE.jar:/home/yunzimo/javaproject/mavenlocalresp/aopalliance/aopalliance/1.0/aopalliance-1.0.jar:/home/yunzimo/javaproject/mavenlocalresp/org/springframework/spring-core/4.2.4.RELEASE/spring-core-4.2.4.RELEASE.jar:/home/yunzimo/javaproject/mavenlocalresp/commons-logging/commons-logging/1.2/commons-logging-1.2.jar:/home/yunzimo/javaproject/mavenlocalresp/org/springframework/spring-expression/4.2.4.RELEASE/spring-expression-4.2.4.RELEASE.jar:/home/yunzimo/javaproject/mavenlocalresp/org/springframework/spring-beans/4.2.4.RELEASE/spring-beans-4.2.4.RELEASE.jar:/home/yunzimo/javaproject/mavenlocalresp/org/mybatis/mybatis/3.2.8/mybatis-3.2.8.jar:/home/yunzimo/javaproject/mavenlocalresp/org/mybatis/mybatis-spring/1.2.2/mybatis-spring-1.2.2.jar:/home/yunzimo/javaproject/mavenlocalresp/com/github/pagehelper/pagehelper/4.0.0/pagehelper-4.0.0.jar:/home/yunzimo/javaproject/mavenlocalresp/com/github/jsqlparser/jsqlparser/0.9.1/jsqlparser-0.9.1.jar:/home/yunzimo/javaproject/mavenlocalresp/mysql/mysql-connector-java/5.1.32/mysql-connector-java-5.1.32.jar:/home/yunzimo/javaproject/mavenlocalresp/com/alibaba/druid/1.0.9/druid-1.0.9.jar:/usr/lib/jvm/java-8-openjdk/jre/../lib/jconsole.jar:/usr/lib/jvm/java-8-openjdk/jre/../lib/tools.jar:/home/yunzimo/IdeaProjects/dongyimai-parent/dongyimai-pojo/target/dongyimai-pojo-1.0.jar:/home/yunzimo/javaproject/mavenlocalresp/junit/junit/4.11/junit-4.11.jar:/home/yunzimo/javaproject/mavenlocalresp/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="GBK"/>
+    <property name="java.class.path" value="D:\Desktop\javaproject\IdeaProjects\dongyimai-parent\dongyimai-dao\target\test-classes;D:\Desktop\javaproject\IdeaProjects\dongyimai-parent\dongyimai-dao\target\classes;D:\Desktop\javaproject\LocalResp\org\springframework\spring-context\4.2.4.RELEASE\spring-context-4.2.4.RELEASE.jar;D:\Desktop\javaproject\LocalResp\org\springframework\spring-aop\4.2.4.RELEASE\spring-aop-4.2.4.RELEASE.jar;D:\Desktop\javaproject\LocalResp\aopalliance\aopalliance\1.0\aopalliance-1.0.jar;D:\Desktop\javaproject\LocalResp\org\springframework\spring-core\4.2.4.RELEASE\spring-core-4.2.4.RELEASE.jar;D:\Desktop\javaproject\LocalResp\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;D:\Desktop\javaproject\LocalResp\org\springframework\spring-expression\4.2.4.RELEASE\spring-expression-4.2.4.RELEASE.jar;D:\Desktop\javaproject\LocalResp\org\springframework\spring-beans\4.2.4.RELEASE\spring-beans-4.2.4.RELEASE.jar;D:\Desktop\javaproject\LocalResp\org\mybatis\mybatis\3.2.8\mybatis-3.2.8.jar;D:\Desktop\javaproject\LocalResp\org\mybatis\mybatis-spring\1.2.2\mybatis-spring-1.2.2.jar;D:\Desktop\javaproject\LocalResp\com\github\pagehelper\pagehelper\4.0.0\pagehelper-4.0.0.jar;D:\Desktop\javaproject\LocalResp\com\github\jsqlparser\jsqlparser\0.9.1\jsqlparser-0.9.1.jar;D:\Desktop\javaproject\LocalResp\mysql\mysql-connector-java\5.1.32\mysql-connector-java-5.1.32.jar;D:\Desktop\javaproject\LocalResp\com\alibaba\druid\1.0.9\druid-1.0.9.jar;C:\Program Files\Java\jdk1.8.0_241\jre\..\lib\jconsole.jar;C:\Program Files\Java\jdk1.8.0_241\jre\..\lib\tools.jar;D:\Desktop\javaproject\IdeaProjects\dongyimai-parent\dongyimai-pojo\target\dongyimai-pojo-1.0.jar;D:\Desktop\javaproject\LocalResp\junit\junit\4.11\junit-4.11.jar;D:\Desktop\javaproject\LocalResp\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
-    <property name="user.timezone" value=""/>
+    <property name="user.timezone" value="Asia/Shanghai"/>
     <property name="java.vm.specification.version" value="1.8"/>
-    <property name="os.name" value="Linux"/>
+    <property name="os.name" value="Windows 10"/>
     <property name="user.country" value="CN"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
-    <property name="sun.boot.library.path" value="/usr/lib/jvm/java-8-openjdk/jre/lib/amd64"/>
-    <property name="sun.java.command" value="/home/yunzimo/IdeaProjects/dongyimai-parent/dongyimai-dao/target/surefire/surefirebooter131790347892589188.jar /home/yunzimo/IdeaProjects/dongyimai-parent/dongyimai-dao/target/surefire 2020-11-06T15-49-59_266-jvmRun1 surefire5405174349960828074tmp surefire_14206049151535851758tmp"/>
-    <property name="surefire.test.class.path" value="/home/yunzimo/IdeaProjects/dongyimai-parent/dongyimai-dao/target/test-classes:/home/yunzimo/IdeaProjects/dongyimai-parent/dongyimai-dao/target/classes:/home/yunzimo/javaproject/mavenlocalresp/org/springframework/spring-context/4.2.4.RELEASE/spring-context-4.2.4.RELEASE.jar:/home/yunzimo/javaproject/mavenlocalresp/org/springframework/spring-aop/4.2.4.RELEASE/spring-aop-4.2.4.RELEASE.jar:/home/yunzimo/javaproject/mavenlocalresp/aopalliance/aopalliance/1.0/aopalliance-1.0.jar:/home/yunzimo/javaproject/mavenlocalresp/org/springframework/spring-core/4.2.4.RELEASE/spring-core-4.2.4.RELEASE.jar:/home/yunzimo/javaproject/mavenlocalresp/commons-logging/commons-logging/1.2/commons-logging-1.2.jar:/home/yunzimo/javaproject/mavenlocalresp/org/springframework/spring-expression/4.2.4.RELEASE/spring-expression-4.2.4.RELEASE.jar:/home/yunzimo/javaproject/mavenlocalresp/org/springframework/spring-beans/4.2.4.RELEASE/spring-beans-4.2.4.RELEASE.jar:/home/yunzimo/javaproject/mavenlocalresp/org/mybatis/mybatis/3.2.8/mybatis-3.2.8.jar:/home/yunzimo/javaproject/mavenlocalresp/org/mybatis/mybatis-spring/1.2.2/mybatis-spring-1.2.2.jar:/home/yunzimo/javaproject/mavenlocalresp/com/github/pagehelper/pagehelper/4.0.0/pagehelper-4.0.0.jar:/home/yunzimo/javaproject/mavenlocalresp/com/github/jsqlparser/jsqlparser/0.9.1/jsqlparser-0.9.1.jar:/home/yunzimo/javaproject/mavenlocalresp/mysql/mysql-connector-java/5.1.32/mysql-connector-java-5.1.32.jar:/home/yunzimo/javaproject/mavenlocalresp/com/alibaba/druid/1.0.9/druid-1.0.9.jar:/usr/lib/jvm/java-8-openjdk/jre/../lib/jconsole.jar:/usr/lib/jvm/java-8-openjdk/jre/../lib/tools.jar:/home/yunzimo/IdeaProjects/dongyimai-parent/dongyimai-pojo/target/dongyimai-pojo-1.0.jar:/home/yunzimo/javaproject/mavenlocalresp/junit/junit/4.11/junit-4.11.jar:/home/yunzimo/javaproject/mavenlocalresp/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_241\jre\bin"/>
+    <property name="sun.java.command" value="C:\Users\yunzi\AppData\Local\Temp\surefire641099464367102113\surefirebooter5855204714927139100.jar C:\Users\yunzi\AppData\Local\Temp\surefire641099464367102113 2020-11-08T20-38-45_046-jvmRun1 surefire4971751586551206111tmp surefire_18973602784437966533tmp"/>
+    <property name="surefire.test.class.path" value="D:\Desktop\javaproject\IdeaProjects\dongyimai-parent\dongyimai-dao\target\test-classes;D:\Desktop\javaproject\IdeaProjects\dongyimai-parent\dongyimai-dao\target\classes;D:\Desktop\javaproject\LocalResp\org\springframework\spring-context\4.2.4.RELEASE\spring-context-4.2.4.RELEASE.jar;D:\Desktop\javaproject\LocalResp\org\springframework\spring-aop\4.2.4.RELEASE\spring-aop-4.2.4.RELEASE.jar;D:\Desktop\javaproject\LocalResp\aopalliance\aopalliance\1.0\aopalliance-1.0.jar;D:\Desktop\javaproject\LocalResp\org\springframework\spring-core\4.2.4.RELEASE\spring-core-4.2.4.RELEASE.jar;D:\Desktop\javaproject\LocalResp\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;D:\Desktop\javaproject\LocalResp\org\springframework\spring-expression\4.2.4.RELEASE\spring-expression-4.2.4.RELEASE.jar;D:\Desktop\javaproject\LocalResp\org\springframework\spring-beans\4.2.4.RELEASE\spring-beans-4.2.4.RELEASE.jar;D:\Desktop\javaproject\LocalResp\org\mybatis\mybatis\3.2.8\mybatis-3.2.8.jar;D:\Desktop\javaproject\LocalResp\org\mybatis\mybatis-spring\1.2.2\mybatis-spring-1.2.2.jar;D:\Desktop\javaproject\LocalResp\com\github\pagehelper\pagehelper\4.0.0\pagehelper-4.0.0.jar;D:\Desktop\javaproject\LocalResp\com\github\jsqlparser\jsqlparser\0.9.1\jsqlparser-0.9.1.jar;D:\Desktop\javaproject\LocalResp\mysql\mysql-connector-java\5.1.32\mysql-connector-java-5.1.32.jar;D:\Desktop\javaproject\LocalResp\com\alibaba\druid\1.0.9\druid-1.0.9.jar;C:\Program Files\Java\jdk1.8.0_241\jre\..\lib\jconsole.jar;C:\Program Files\Java\jdk1.8.0_241\jre\..\lib\tools.jar;D:\Desktop\javaproject\IdeaProjects\dongyimai-parent\dongyimai-pojo\target\dongyimai-pojo-1.0.jar;D:\Desktop\javaproject\LocalResp\junit\junit\4.11\junit-4.11.jar;D:\Desktop\javaproject\LocalResp\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
-    <property name="user.home" value="/home/yunzimo"/>
+    <property name="user.home" value="C:\Users\yunzi"/>
     <property name="user.language" value="zh"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
-    <property name="java.home" value="/usr/lib/jvm/java-8-openjdk/jre"/>
-    <property name="basedir" value="/home/yunzimo/IdeaProjects/dongyimai-parent/dongyimai-dao"/>
-    <property name="file.separator" value="/"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk1.8.0_241\jre"/>
+    <property name="basedir" value="D:\Desktop\javaproject\IdeaProjects\dongyimai-parent\dongyimai-dao"/>
+    <property name="file.separator" value="\"/>
     <property name="line.separator" value="&#10;"/>
+    <property name="idea.version2019.2.4" value="true"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="/home/yunzimo/IdeaProjects/dongyimai-parent/dongyimai-dao/target/surefire/surefirebooter131790347892589188.jar"/>
-    <property name="idea.version2020.1.4" value="true"/>
-    <property name="sun.boot.class.path" value="/usr/lib/jvm/java-8-openjdk/jre/lib/resources.jar:/usr/lib/jvm/java-8-openjdk/jre/lib/rt.jar:/usr/lib/jvm/java-8-openjdk/jre/lib/sunrsasign.jar:/usr/lib/jvm/java-8-openjdk/jre/lib/jsse.jar:/usr/lib/jvm/java-8-openjdk/jre/lib/jce.jar:/usr/lib/jvm/java-8-openjdk/jre/lib/charsets.jar:/usr/lib/jvm/java-8-openjdk/jre/lib/jfr.jar:/usr/lib/jvm/java-8-openjdk/jre/classes"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
+    <property name="surefire.real.class.path" value="C:\Users\yunzi\AppData\Local\Temp\surefire641099464367102113\surefirebooter5855204714927139100.jar"/>
+    <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.8.0_241\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_241\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_241\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_241\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_241\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_241\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_241\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_241\jre\classes"/>
+    <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="java.runtime.version" value="1.8.0_265-b01"/>
-    <property name="user.name" value="yunzimo"/>
-    <property name="path.separator" value=":"/>
-    <property name="os.version" value="5.4.72-1-MANJARO"/>
-    <property name="java.endorsed.dirs" value="/usr/lib/jvm/java-8-openjdk/jre/lib/endorsed"/>
-    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
-    <property name="file.encoding" value="UTF-8"/>
-    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
-    <property name="localRepository" value="/home/yunzimo/javaproject/mavenlocalresp"/>
+    <property name="java.runtime.version" value="1.8.0_241-b07"/>
+    <property name="user.name" value="yunzi"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.8.0_241\jre\lib\endorsed"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="GBK"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="localRepository" value="D:\Desktop\javaproject\LocalResp"/>
     <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
-    <property name="java.io.tmpdir" value="/tmp"/>
-    <property name="java.version" value="1.8.0_265"/>
-    <property name="user.dir" value="/home/yunzimo/IdeaProjects/dongyimai-parent/dongyimai-dao"/>
+    <property name="java.io.tmpdir" value="C:\Users\yunzi\AppData\Local\Temp\"/>
+    <property name="java.version" value="1.8.0_241"/>
+    <property name="user.dir" value="D:\Desktop\javaproject\IdeaProjects\dongyimai-parent\dongyimai-dao"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/>
-    <property name="sun.os.patch.level" value="unknown"/>
-    <property name="java.library.path" value="/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib"/>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_241\jre\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;E:\ffmpeg\bin;D:\Putty\;C:\Program Files (x86)\Java\jre1.8.0_261\bin;C:\Program Files\MySQL\MySQL Server 5.5\bin;D:\python\Scripts\;D:\python\;C:\Users\yunzi\AppData\Local\Microsoft\WindowsApps;C:\Program Files\MySQL\MySQL Server 5.5\bin;;E:\IDEA\IntelliJ IDEA 2019.2.4\bin;;."/>
     <property name="java.vm.info" value="mixed mode"/>
     <property name="java.vendor" value="Oracle Corporation"/>
-    <property name="java.vm.version" value="25.265-b01"/>
-    <property name="java.ext.dirs" value="/usr/lib/jvm/java-8-openjdk/jre/lib/ext:/usr/java/packages/lib/ext"/>
+    <property name="java.vm.version" value="25.241-b07"/>
+    <property name="java.ext.dirs" value="C:\Program Files\Java\jdk1.8.0_241\jre\lib\ext;C:\Windows\Sun\Java\lib\ext"/>
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
-    <property name="maven.repo.local" value="/home/yunzimo/javaproject/mavenlocalresp"/>
+    <property name="maven.repo.local" value="D:\Desktop\javaproject\LocalResp"/>
     <property name="java.class.version" value="52.0"/>
   </properties>
   <testcase name="shouldAnswerWithTrue" classname="com.offcn.AppTest" time="0.001"/>

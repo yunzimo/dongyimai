@@ -11,14 +11,14 @@ app.controller('baseController',function ($scope) {
 
     $scope.reloadList=function(){
         $scope.findPage($scope.paginationConf.currentPage,$scope.paginationConf.itemsPerPage);
-    }
+    };
 
     $scope.selectIds=[];
     $scope.addToIds=function ($event,id) {
         if($event.target.checked==true){
             $scope.selectIds.push(id);
         }else{
-            let number = $scope.selectIds.indexOf(id);
+            var number = $scope.selectIds.indexOf(id);
             $scope.selectIds.splice(number,1);
         }
     }

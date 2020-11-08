@@ -27,6 +27,6 @@
     </mvc:annotation-driven>
     <!-- 引用dubbo 服务 -->
     <dubbo:application name="dongyimai-manager-web" />
-    <dubbo:registry address="zookeeper://172.16.150.159:2181"/>
+    <dubbo:registry address="zookeeper://172.16.150.132:2181"/>
     <dubbo:annotation package="com.offcn.sellergoods.controller" />
 </beans>

@@ -40,25 +40,34 @@ app.controller('typeTemplateController' ,function($scope,$controller,typeTemplat
 		);
 	}
 
-	//json字符串转换为固定格式字符串
-
-	$scope.formatChange=function(list){
-		for(var item in list){
-
-		}
-	}
-	
 	//分页
-	$scope.findPage=function(page,rows){			
+	$scope.findPage=function(page,rows){
 		typeTemplateService.findPage(page,rows).success(
 			function(response){
-				$scope.list=response.rows;
 				//this.formatChange(response.rows);
+				for(var i=0;i<response.rows.length;i++){
+					response.rows[i].specIds=$scope.formatChange(response.rows[i].specIds);
+					response.rows[i].brandIds=$scope.formatChange(response.rows[i].brandIds);
+					response.rows[i].customAttributeItems=$scope.formatChange(response.rows[i].customAttributeItems);
+				}
+				$scope.list=response.rows;
 				$scope.paginationConf.totalItems=response.total;//更新总记录数
-			}			
+			}
 		);
 	}
-	
+
+
+	//json字符串转换为固定格式字符串
+	$scope.formatChange=function(member){
+		let parse = JSON.parse(member);
+		var param="";
+		for(var j=0;j<parse.length;j++){
+			param+=parse[j]["text"]+",";
+		}
+		param=param.substring(0,param.length-1);
+		return param;
+	}
+
 	//查询实体 
 	$scope.findOne=function(id){				
 		typeTemplateService.findOne(id).success(

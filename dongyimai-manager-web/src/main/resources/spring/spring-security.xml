@@ -24,7 +24,7 @@
         <!--
         always-use-default-target:设置默认登录成功后进入的页面是default-target-url
         -->
-        <form-login login-page="/login.html" default-target-url="/admin/brand.html" always-use-default-target="true"/>
+        <form-login login-page="/login.html" default-target-url="/admin/index.html" always-use-default-target="true"/>
         <!--设置框架同源
             解析：当登录由于超时结束，后点击框架中链接就直接回到登录页面。
         -->
@@ -33,6 +33,8 @@
         </headers>
 
         <csrf disabled="true"/>
+
+        <logout />
     </http>
 
     <authentication-manager>
