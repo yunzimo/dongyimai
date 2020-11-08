@@ -34,6 +34,11 @@
 
         <csrf disabled="true"/>
 
+<!--        logout:实现退出
+        logout-url:退出后到指定页面
+        logout-success-url="";退出成功后到对应url
+        如果不设置url默认退出到登录页面
+-->
         <logout />
     </http>
 
