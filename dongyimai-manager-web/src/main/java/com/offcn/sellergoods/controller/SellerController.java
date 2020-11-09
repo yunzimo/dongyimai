@@ -1,4 +1,6 @@
 package com.offcn.sellergoods.controller;
+import java.sql.ResultSet;
+import java.util.Date;
 import java.util.List;
 
 import com.offcn.service.SellerService;
@@ -50,6 +52,8 @@ public class SellerController {
 	@RequestMapping("/add")
 	public Result add(@RequestBody TbSeller seller){
 		try {
+			seller.setStatus("0");
+			seller.setCreateTime(new Date());
 			sellerService.add(seller);
 			return new Result(true, "增加成功");
 		} catch (Exception e) {
@@ -110,6 +114,19 @@ public class SellerController {
 	@RequestMapping("/search")
 	public PageResult search(@RequestBody TbSeller seller, int page, int rows  ){
 		return sellerService.findPage(seller, page, rows);		
+	}
+
+	@RequestMapping("/updateStatus")
+	public Result updateStatus(String sellerId,String status){
+		TbSeller one = sellerService.findOne(sellerId);
+		one.setStatus(status);
+		try{
+			sellerService.update(one);
+			return new Result(true, "修改成功");
+		}catch (Exception e){
+			e.printStackTrace();
+			return new Result(false, "修改失败");
+		}
 	}
 	
 }

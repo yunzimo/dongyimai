@@ -4,14 +4,14 @@ import java.io.Serializable;
 
 public class Result implements Serializable {
     private Boolean success;
-    private String msg;
+    private String message;
 
     public Result() {
     }
 
-    public Result(Boolean success, String msg) {
+    public Result(Boolean success, String message) {
         this.success = success;
-        this.msg = msg;
+        this.message = message;
     }
 
     public Boolean getSuccess() {
@@ -22,19 +22,19 @@ public class Result implements Serializable {
         this.success = success;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     @Override
     public String toString() {
         return "Result{" +
                 "success=" + success +
-                ", msg='" + msg + '\'' +
+                ", msg='" + message + '\'' +
                 '}';
     }
 }

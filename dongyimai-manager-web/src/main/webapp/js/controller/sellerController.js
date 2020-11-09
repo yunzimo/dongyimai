@@ -23,13 +23,24 @@ app.controller('sellerController',function($scope,$controller,sellerService){
 	}
 	
 	//查询实体 
-	$scope.findOne=function(id){				
-		sellerService.findOne(id).success(
+	$scope.findOne=function(){
+		sellerService.findOne($scope.seller.sellerId).success(
 			function(response){
 				$scope.entity= response;					
 			}
 		);				
-	}
+	};
+
+	$scope.updateStatus=function(status){
+		sellerService.updateStatus($scope.entity.sellerId,status).success(function (response) {
+			if(response.success){
+				//重新查询
+				$scope.reloadList();//重新加载
+			}else{
+				alert(response.message);
+			}
+		})
+	};
 	
 	//保存 
 	$scope.save=function(){				

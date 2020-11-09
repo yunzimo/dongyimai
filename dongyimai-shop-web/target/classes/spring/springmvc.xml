@@ -26,5 +26,5 @@
     </mvc:annotation-driven>
     <dubbo:application name="dongyimai-shop-web"/>
     <dubbo:registry address="zookeeper://172.16.150.132:2181"/>
-    <dubbo:annotation package="com.offcn.shop.controller"/>
+    <dubbo:annotation package="com.offcn.shop"/>
 </beans>
