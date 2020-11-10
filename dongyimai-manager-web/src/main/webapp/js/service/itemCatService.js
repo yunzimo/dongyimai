@@ -5,6 +5,8 @@ app.service('itemCatService',function($http){
 	this.findAll=function(){
 		return $http.get('../itemCat/findAll.do');		
 	}
+
+
 	//分页 
 	this.findPage=function(page,rows){
 		return $http.get('../itemCat/findPage.do?page='+page+'&rows='+rows);
@@ -28,5 +30,8 @@ app.service('itemCatService',function($http){
 	//搜索
 	this.search=function(page,rows,searchEntity){
 		return $http.post('../itemCat/search.do?page='+page+"&rows="+rows, searchEntity);
-	}    	
+	};
+	this.findByParentId=function (parentId) {
+		return $http.post('../itemCat/findByParentId.do?parentId='+parentId);
+	}
 });

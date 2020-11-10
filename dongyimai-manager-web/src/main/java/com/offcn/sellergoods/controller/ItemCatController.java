@@ -11,6 +11,9 @@ import com.offcn.pojo.TbItemCat;
 
 import com.offcn.entity.PageResult;
 import com.offcn.entity.Result;
+
+import javax.sound.midi.Soundbank;
+
 /**
  * 商品类目controller
  * @author Administrator
@@ -102,7 +105,7 @@ public class ItemCatController {
 	
 		/**
 	 * 查询+分页
-	 * @param brand
+	 * @param itemCat
 	 * @param page
 	 * @param rows
 	 * @return
@@ -110,6 +113,13 @@ public class ItemCatController {
 	@RequestMapping("/search")
 	public PageResult search(@RequestBody TbItemCat itemCat, int page, int rows  ){
 		return itemCatService.findPage(itemCat, page, rows);		
+	}
+
+	@RequestMapping("/findByParentId")
+	public List<TbItemCat> findByParentId(Long parentId){
+		List<TbItemCat> byParentId = itemCatService.findByParentId(parentId);
+		System.out.println(byParentId);
+		return byParentId;
 	}
 	
 }

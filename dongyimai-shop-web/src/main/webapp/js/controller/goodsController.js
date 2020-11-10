@@ -81,5 +81,9 @@ app.controller('goodsController' ,function($scope,goodsService){
 			}			
 		);
 	}
+	
+	$scope.findByParentId=function () {
+		
+	}
     
 });	
