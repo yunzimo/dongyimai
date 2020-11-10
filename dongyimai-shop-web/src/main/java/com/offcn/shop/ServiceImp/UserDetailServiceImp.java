@@ -38,7 +38,7 @@ public class UserDetailServiceImp implements UserDetailsService {
         List<GrantedAuthority> list=new ArrayList<>();
         list.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         TbSeller one = sellerService.findOne(username);
-        System.out.println("===============password"+one.getPassword());
+
         if(one!=null){
             //状态判断 0:未审核，1:审核通过，2:未通过，3:关闭商家
             if(one.getStatus().equals("1")){

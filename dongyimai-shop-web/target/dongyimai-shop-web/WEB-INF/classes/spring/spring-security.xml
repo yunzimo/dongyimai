@@ -4,12 +4,14 @@
         xmlns:beans="http://www.springframework.org/schema/beans"
         xmlns:context="http://www.springframework.org/schema/context"
         xmlns:p="http://www.springframework.org/schema/p"
+        xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
 ">
-    <context:component-scan base-package="com.offcn.shop.ServiceImp"/>
+<!--    <context:component-scan base-package="com.offcn.shop.ServiceImp"/>-->
     <!--拦截器配置-->
     <!--不拦截-->
     <http pattern="/favico.ioc" security="none"/>
@@ -26,7 +28,7 @@
     <http use-expressions="false">
         <intercept-url pattern="/admin/**" access="ROLE_ADMIN"/>
         <!--
-        always-use-default-target:设置默认登录成功后进入的页面是default-target-url
+         always-use-default-target:设置默认登录成功后进入的页面是default-target-url
         -->
         <form-login login-page="/shoplogin.html" default-target-url="/admin/index.html" always-use-default-target="true"/>
 
@@ -40,10 +42,27 @@
     </http>
 
     <authentication-manager>
-        <authentication-provider user-service-ref="userDetail"/>
+        <authentication-provider user-service-ref="userDetail" >
+            <password-encoder ref="bCryptPasswordEncoder"/>
+        </authentication-provider>
+
     </authentication-manager>
 
-    <beans:bean id="userDetail" class="com.offcn.shop.ServiceImp.UserDetailServiceImp"/>
+    <beans:bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+
+    <beans:bean id="userDetail" class="com.offcn.shop.ServiceImp.UserDetailServiceImp">
+        <beans:property name="sellerService" ref="sellerService"/>
+    </beans:bean>
+
+
+    <dubbo:application name="dongyimai-shop-web"/>
+    <dubbo:registry address="zookeeper://172.16.150.132:2181"/>
+
+    <!--dubbo:reference：远程调用服务
+    interface：该服务对应的接口
+    id：接口唯一标示
+    -->
+    <dubbo:reference interface="com.offcn.service.SellerService" id="sellerService"/>
 
 
 </beans:beans>

@@ -1,5 +1,7 @@
 package com.offcn.service;
 import java.util.List;
+
+import com.offcn.entity.Goods;
 import com.offcn.pojo.TbGoods;
 
 import com.offcn.entity.PageResult;
@@ -27,7 +29,7 @@ public interface GoodsService {
 	/**
 	 * 增加
 	*/
-	public void add(TbGoods goods);
+	public void add(Goods goods);
 	
 	
 	/**

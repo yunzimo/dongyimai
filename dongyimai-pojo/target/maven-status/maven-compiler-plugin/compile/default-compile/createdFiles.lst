@@ -65,6 +65,7 @@ com\offcn\pojo\TbAreasExample$GeneratedCriteria.class
 com\offcn\pojo\TbItemExample$GeneratedCriteria.class
 com\offcn\pojo\TbBrandExample$GeneratedCriteria.class
 com\offcn\pojo\TbGoodsDescExample.class
+com\offcn\entity\Goods.class
 com\offcn\pojo\TbContentCategory.class
 com\offcn\pojo\TbContentExample.class
 com\offcn\pojo\TbAreas.class

@@ -1,1 +1,1 @@
-var app=angular.module('youlexuan',['pagination']);
+var app=angular.module('dongyimai',['pagination']);
