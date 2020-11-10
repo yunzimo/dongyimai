@@ -10,13 +10,14 @@ app.controller('itemCatController' ,function($scope,$controller,itemCatService){
 		if($scope.entity.id!=null){//如果有ID
 			serviceObject=itemCatService.update( $scope.entity ); //修改  
 		}else{
+			$scope.entity.parentId=$scope.parentId;
 			serviceObject=itemCatService.add( $scope.entity  );//增加 
 		}				
 		serviceObject.success(
 			function(response){
 				if(response.success){
 					//重新查询 
-		        	$scope.reloadList();//重新加载
+		        	$scope.findByParentId($scope.parentId);//重新加载
 				}else{
 					alert(response.message);
 				}
@@ -31,7 +32,7 @@ app.controller('itemCatController' ,function($scope,$controller,itemCatService){
 		itemCatService.dele( $scope.selectIds ).success(
 			function(response){
 				if(response.success){
-					$scope.reloadList();//刷新列表
+					$scope.findByParentId($scope.parentId);//重新加载
 					$scope.selectIds=[];
 				}						
 			}		
@@ -49,13 +50,14 @@ app.controller('itemCatController' ,function($scope,$controller,itemCatService){
 			}			
 		);
 	};
-	$scope.entity={
-		list:[]
-	}
+	// $scope.entity={
+	// 	list:[]
+	// };
 	$scope.findByParentId=function (parentId) {
+		$scope.parentId=parentId;
 		itemCatService.findByParentId(parentId).success(
 			function (response) {
-				$scope.entity.list=response;
+				$scope.list=response;
 			}
 		)
 	};

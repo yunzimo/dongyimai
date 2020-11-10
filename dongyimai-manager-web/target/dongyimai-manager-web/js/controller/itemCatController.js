@@ -63,7 +63,7 @@ app.controller('itemCatController' ,function($scope,$controller,itemCatService){
 				}						
 			}		
 		);				
-	}
+	};
 	
 	$scope.searchEntity={};//定义搜索对象 
 	
@@ -75,6 +75,14 @@ app.controller('itemCatController' ,function($scope,$controller,itemCatService){
 				$scope.paginationConf.totalItems=response.total;//更新总记录数
 			}			
 		);
-	}
+	};
+	
+	$scope.findByParentId=function (parentId) {
+		itemCatService.findByParentId(parentId).success(
+			function (response) {
+				$scope.entity.list=response;
+			}
+		)
+	};
     
 });	
