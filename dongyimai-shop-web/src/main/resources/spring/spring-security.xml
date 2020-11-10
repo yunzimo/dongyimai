@@ -28,7 +28,7 @@
     <http use-expressions="false">
         <intercept-url pattern="/admin/**" access="ROLE_ADMIN"/>
         <!--
-        always-use-default-target:设置默认登录成功后进入的页面是default-target-url
+         always-use-default-target:设置默认登录成功后进入的页面是default-target-url
         -->
         <form-login login-page="/shoplogin.html" default-target-url="/admin/index.html" always-use-default-target="true"/>
 
@@ -56,7 +56,7 @@
     <!--dubbo:reference：远程调用服务
     interface：该服务对应的接口
     id：接口唯一标示
--->
+    -->
     <dubbo:reference interface="com.offcn.service.SellerService" id="sellerService"/>
 
 

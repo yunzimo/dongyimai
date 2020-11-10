@@ -1,3 +1,4 @@
 com\offcn\shop\ServiceImp\UserDetailServiceImp.class
 com\offcn\shop\controller\GoodsController.class
 com\offcn\shop\controller\SellerController.class
+com\offcn\shop\controller\LoginController.class
