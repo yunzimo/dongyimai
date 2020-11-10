@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.offcn.AppTest" time="0.037" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.offcn.AppTest" time="0.042" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -18,7 +18,7 @@
     <property name="user.country" value="CN"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_241\jre\bin"/>
-    <property name="sun.java.command" value="C:\Users\yunzi\AppData\Local\Temp\surefire3293075750586141856\surefirebooter7515373411482627366.jar C:\Users\yunzi\AppData\Local\Temp\surefire3293075750586141856 2020-11-10T20-10-55_820-jvmRun1 surefire6051890178888831359tmp surefire_1897604980914261615tmp"/>
+    <property name="sun.java.command" value="C:\Users\yunzi\AppData\Local\Temp\surefire5857515386879507785\surefirebooter5621328755184711863.jar C:\Users\yunzi\AppData\Local\Temp\surefire5857515386879507785 2020-11-10T22-30-49_710-jvmRun1 surefire2315367823027060662tmp surefire_14943683148850812825tmp"/>
     <property name="surefire.test.class.path" value="D:\Desktop\javaproject\IdeaProjects\dongyimai-git\dongyimai-dao\target\test-classes;D:\Desktop\javaproject\IdeaProjects\dongyimai-git\dongyimai-dao\target\classes;D:\Desktop\javaproject\LocalResp\org\springframework\spring-context\4.2.4.RELEASE\spring-context-4.2.4.RELEASE.jar;D:\Desktop\javaproject\LocalResp\org\springframework\spring-aop\4.2.4.RELEASE\spring-aop-4.2.4.RELEASE.jar;D:\Desktop\javaproject\LocalResp\aopalliance\aopalliance\1.0\aopalliance-1.0.jar;D:\Desktop\javaproject\LocalResp\org\springframework\spring-core\4.2.4.RELEASE\spring-core-4.2.4.RELEASE.jar;D:\Desktop\javaproject\LocalResp\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;D:\Desktop\javaproject\LocalResp\org\springframework\spring-expression\4.2.4.RELEASE\spring-expression-4.2.4.RELEASE.jar;D:\Desktop\javaproject\LocalResp\org\springframework\spring-beans\4.2.4.RELEASE\spring-beans-4.2.4.RELEASE.jar;D:\Desktop\javaproject\LocalResp\org\mybatis\mybatis\3.2.8\mybatis-3.2.8.jar;D:\Desktop\javaproject\LocalResp\org\mybatis\mybatis-spring\1.2.2\mybatis-spring-1.2.2.jar;D:\Desktop\javaproject\LocalResp\com\github\pagehelper\pagehelper\4.0.0\pagehelper-4.0.0.jar;D:\Desktop\javaproject\LocalResp\com\github\jsqlparser\jsqlparser\0.9.1\jsqlparser-0.9.1.jar;D:\Desktop\javaproject\LocalResp\mysql\mysql-connector-java\5.1.32\mysql-connector-java-5.1.32.jar;D:\Desktop\javaproject\LocalResp\com\alibaba\druid\1.0.9\druid-1.0.9.jar;C:\Program Files\Java\jdk1.8.0_241\jre\..\lib\jconsole.jar;C:\Program Files\Java\jdk1.8.0_241\jre\..\lib\tools.jar;D:\Desktop\javaproject\IdeaProjects\dongyimai-git\dongyimai-pojo\target\dongyimai-pojo-1.0.jar;D:\Desktop\javaproject\LocalResp\junit\junit\4.11\junit-4.11.jar;D:\Desktop\javaproject\LocalResp\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\yunzi"/>
@@ -32,7 +32,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="C:\Users\yunzi\AppData\Local\Temp\surefire3293075750586141856\surefirebooter7515373411482627366.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\yunzi\AppData\Local\Temp\surefire5857515386879507785\surefirebooter5621328755184711863.jar"/>
     <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.8.0_241\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_241\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_241\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_241\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_241\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_241\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_241\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_241\jre\classes"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>

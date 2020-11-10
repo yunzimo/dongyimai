@@ -1,7 +1,18 @@
  //商品控制层 
-app.controller('goodsController' ,function($scope,goodsService){
-	
+app.controller('goodsController' ,function($scope,goodsService,uploadService){
 
+
+	$scope.image_entity={};
+	$scope.upload=function(){
+		uploadService.upload().success(function (response) {
+			if(response.message){
+				console.log(response.message);
+				$scope.image_entity.url=response.message;
+			}else {
+				alert(response.message);
+			}
+		})
+	}
 	
     //读取列表数据绑定到表单中  
 	$scope.findAll=function(){
