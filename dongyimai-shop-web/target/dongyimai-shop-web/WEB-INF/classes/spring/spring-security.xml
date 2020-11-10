@@ -9,6 +9,7 @@
        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 ">
+    <context:component-scan base-package="com.offcn.shop.ServiceImp"/>
     <!--拦截器配置-->
     <!--不拦截-->
     <http pattern="/favico.ioc" security="none"/>
@@ -43,5 +44,6 @@
     </authentication-manager>
 
     <beans:bean id="userDetail" class="com.offcn.shop.ServiceImp.UserDetailServiceImp"/>
+
 
 </beans:beans>
