@@ -34,7 +34,7 @@ app.controller('goodsController' ,function($scope,goodsService){
 	//保存 
 	$scope.save=function(){				
 		var serviceObject;//服务层对象
-		$scope.entity.introduction=editor.html();
+		$scope.entity.goodsDesc.introduction=editor.html();
 		if($scope.entity.goods.id!=null){//如果有ID
 			serviceObject=goodsService.update( $scope.entity ); //修改  
 		}else{
