@@ -42,8 +42,13 @@
     </http>
 
     <authentication-manager>
-        <authentication-provider user-service-ref="userDetail" />
+        <authentication-provider user-service-ref="userDetail" >
+            <password-encoder ref="bCryptPasswordEncoder"/>
+        </authentication-provider>
+
     </authentication-manager>
+
+    <beans:bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 
     <beans:bean id="userDetail" class="com.offcn.shop.ServiceImp.UserDetailServiceImp">
         <beans:property name="sellerService" ref="sellerService"/>

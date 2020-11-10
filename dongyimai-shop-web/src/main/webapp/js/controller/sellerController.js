@@ -1,7 +1,7 @@
  //商户控制层 
-app.controller('sellerController' ,function($scope,$controller   ,sellerService){	
+app.controller('sellerController' ,function($scope,sellerService){
 	
-	$controller('baseController',{$scope:$scope});//继承
+	// $controller('baseController',{$scope:$scope});//继承
 	
     //读取列表数据绑定到表单中  
 	$scope.findAll=function(){
@@ -54,7 +54,7 @@ app.controller('sellerController' ,function($scope,$controller   ,sellerService)
 	$scope.register=function(){
 		sellerService.add($scope.entity).success(function (response) {
 			if(response.success){
-				$scope.reloadList();
+				alert(response.message);
 			}else{
 				alert(response.message);
 			}
