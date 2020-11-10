@@ -33,7 +33,8 @@ app.controller('goodsController' ,function($scope,goodsService){
 	
 	//保存 
 	$scope.save=function(){				
-		var serviceObject;//服务层对象  				
+		var serviceObject;//服务层对象
+		$scope.entity.introduction=editor.html();
 		if($scope.entity.goods.id!=null){//如果有ID
 			serviceObject=goodsService.update( $scope.entity ); //修改  
 		}else{
@@ -44,6 +45,10 @@ app.controller('goodsController' ,function($scope,goodsService){
 				if(response.success){
 					//重新查询 
 		        	alert(response.message);
+
+		        	//清空对象和富文本
+		        	$scope.entity={};
+		        	editor.html("");
 				}else{
 					alert(response.message);
 				}
