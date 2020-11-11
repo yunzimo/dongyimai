@@ -22,7 +22,8 @@ $scope.entity={
 
         },
         goodsDesc:{
-            itemImages:[]
+            itemImages:[],
+            customAttributeItems:[]
         }
     };
 
@@ -57,26 +58,37 @@ $scope.entity={
         })
     };
 
+    //监控第一个下拉框的改变
     $scope.$watch('entity.goods.category1Id',function (newValue,oldValue) {
        goodsService.findByParentId(newValue).success(function (response) {
            $scope.typeList_2=response;
-           $scope.typeTempId=response[0].typeId;
-           showBrandList($scope.typeTempId);
-           console.log($scope.typeTempId);
+           //获得模板ID
+           $scope.entity.goods.typeTemplateId=response[0].typeId;
+
+           //初始化需要模板的数据
+           InitTemp($scope.typeTempId);
+
+           //console.log($scope.typeTempId);
            $scope.typeList_3={};
        }) 
     });
+    //监控第二个下拉框的改变
     $scope.$watch('entity.goods.category2Id',function (newValue,oldValue) {
         goodsService.findByParentId(newValue).success(function (response) {
             $scope.typeList_3=response;
         })
     });
-    showBrandList=function(id){
+
+    //关于模板信息的初始化
+    InitTemp=function(id){
         typeTemplateService.findOne(id).success(function (response) {
             $scope.brandList=JSON.parse(response.brandIds);
+            $scope.entity.goodsDesc.customAttributeItems=JSON.parse(response.customAttributeItems);
             console.log($scope.brandList);
         })
     };
+
+
 	
     //读取列表数据绑定到表单中  
 	$scope.findAll=function(){

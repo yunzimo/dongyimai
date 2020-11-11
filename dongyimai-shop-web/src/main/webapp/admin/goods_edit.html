@@ -83,7 +83,7 @@
 		                           	  				<select ng-model="entity.goods.category3Id"  ng-options="item.id as item.name for item in typeList_3" class="form-control select-sm" ></select>
 		                              			</td>
 		                              			<td>
-		                           	  				模板ID:{{typeTempId}}
+		                           	  				模板ID:{{entity.goods.typeTemplateId}}
 		                              			</td>
 		                           	  		</tr>
 		                           	  	</table>
@@ -171,18 +171,13 @@
                             <!--扩展属性-->
                             <div class="tab-pane" id="customAttribute">
                                 <div class="row data-type">                                
-	                                <div>
-		                                <div class="col-md-2 title">扩展属性1</div>
+	                                <div ng-repeat="item in entity.goodsDesc.customAttributeItems">
+		                                <div class="col-md-2 title">{{item.text}}</div>
 				                        <div class="col-md-10 data">
-				                              <input class="form-control" placeholder="扩展属性1">	            	 
+				                              <input ng-model="item.value" class="form-control" placeholder="{{item.text}}">
 				                        </div>
 	                                </div>       
-									<div>
-		                                <div class="col-md-2 title">扩展属性2</div>
-				                        <div class="col-md-10 data">
-				                              <input class="form-control" placeholder="扩展属性2">	            	 
-				                        </div>
-	                                </div>  									
+
                                 </div>
                             </div>
                       
