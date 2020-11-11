@@ -1,6 +1,23 @@
  //商品控制层 
 app.controller('goodsController' ,function($scope,goodsService,uploadService){
 
+    //定义数据结构
+/*    $scope.entity={
+        goods:{},
+        goodsDesc:{
+            itemImages:[{
+                    color:{},
+                    url:{}
+                }]
+        }
+    };*/
+
+    $scope.entity={
+        goods:{},
+        goodsDesc:{
+            itemImages:[]
+        }
+    };
 
 	$scope.image_entity={};
 	$scope.upload=function(){
@@ -8,11 +25,21 @@ app.controller('goodsController' ,function($scope,goodsService,uploadService){
 			if(response.message){
 				console.log(response.message);
 				$scope.image_entity.url=response.message;
+				console.log("imageurl="+$scope.image_entity.url);
 			}else {
 				alert(response.message);
 			}
 		})
-	}
+	};
+
+	$scope.addToImageList=function(){
+	    $scope.entity.goodsDesc.itemImages.push($scope.image_entity);
+	    console.log($scope.image_entity.url);
+    };
+
+	$scope.removeImage=function(index){
+	    $scope.entity.goodsDesc.itemImages.splice(index,1);
+    };
 	
     //读取列表数据绑定到表单中  
 	$scope.findAll=function(){
@@ -21,7 +48,7 @@ app.controller('goodsController' ,function($scope,goodsService,uploadService){
 				$scope.list=response;
 			}			
 		);
-	}    
+	};
 	
 	//分页
 	$scope.findPage=function(page,rows){			
@@ -31,7 +58,7 @@ app.controller('goodsController' ,function($scope,goodsService,uploadService){
 				$scope.paginationConf.totalItems=response.total;//更新总记录数
 			}			
 		);
-	}
+	};
 	
 	//查询实体 
 	$scope.findOne=function(id){				
@@ -40,7 +67,7 @@ app.controller('goodsController' ,function($scope,goodsService,uploadService){
 				$scope.entity= response;					
 			}
 		);				
-	}
+	};
 	
 	//保存 
 	$scope.save=function(){				
