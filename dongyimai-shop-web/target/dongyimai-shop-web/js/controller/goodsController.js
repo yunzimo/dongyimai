@@ -1,6 +1,30 @@
  //商品控制层 
-app.controller('goodsController' ,function($scope,goodsService,uploadService){
+app.controller('goodsController' ,function($scope,goodsService,uploadService,typeTemplateService){
 
+    //定义数据结构
+/*
+$scope.entity={
+        goods:{},
+        goodsDesc:{
+            itemImages:[{
+                    color:{},
+                    url:{}
+                }]
+        }
+    };
+*/
+
+    $scope.entity={
+        goods:{
+            category1Id:{},
+            category2Id:{},
+            category3Id:{}
+
+        },
+        goodsDesc:{
+            itemImages:[]
+        }
+    };
 
 	$scope.image_entity={};
 	$scope.upload=function(){
@@ -8,11 +32,49 @@ app.controller('goodsController' ,function($scope,goodsService,uploadService){
 			if(response.message){
 				console.log(response.message);
 				$scope.image_entity.url=response.message;
+				console.log("imageurl="+$scope.image_entity.url);
 			}else {
 				alert(response.message);
 			}
 		})
-	}
+	};
+
+	$scope.addToImageList=function(){
+	    $scope.entity.goodsDesc.itemImages.push($scope.image_entity);
+	    console.log($scope.image_entity.url);
+    };
+
+	$scope.removeImage=function(index){
+	    $scope.entity.goodsDesc.itemImages.splice(index,1);
+    };
+
+	//初始化商品分类列表
+    $scope.initTypeList=function(){
+        goodsService.findByParentId(0).success(function (response) {
+            $scope.typeList_1=response;
+
+            //console.log($scope.typeList_1);
+        })
+    };
+
+    $scope.$watch('entity.goods.category1Id',function (newValue,oldValue) {
+       goodsService.findByParentId(newValue).success(function (response) {
+           $scope.typeList_2=response;
+           $scope.typeTempId=response[0].typeId;
+           console.log($scope.typeTempId);
+           $scope.typeList_3={};
+       }) 
+    });
+    $scope.$watch('entity.goods.category2Id',function (newValue,oldValue) {
+        goodsService.findByParentId(newValue).success(function (response) {
+            $scope.typeList_3=response;
+        })
+    });
+    showBrandList=function(id){
+        typeTemplateService.findOne(id).success(function (response) {
+            $scope.brandList=JSON.parse(response.brandIds);
+        })
+    };
 	
     //读取列表数据绑定到表单中  
 	$scope.findAll=function(){
@@ -21,7 +83,7 @@ app.controller('goodsController' ,function($scope,goodsService,uploadService){
 				$scope.list=response;
 			}			
 		);
-	}    
+	};
 	
 	//分页
 	$scope.findPage=function(page,rows){			
@@ -31,7 +93,7 @@ app.controller('goodsController' ,function($scope,goodsService,uploadService){
 				$scope.paginationConf.totalItems=response.total;//更新总记录数
 			}			
 		);
-	}
+	};
 	
 	//查询实体 
 	$scope.findOne=function(id){				
@@ -40,7 +102,7 @@ app.controller('goodsController' ,function($scope,goodsService,uploadService){
 				$scope.entity= response;					
 			}
 		);				
-	}
+	};
 	
 	//保存 
 	$scope.save=function(){				

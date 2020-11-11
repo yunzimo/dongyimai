@@ -1,5 +1,5 @@
  //商品控制层 
-app.controller('goodsController' ,function($scope,goodsService,uploadService){
+app.controller('goodsController' ,function($scope,goodsService,uploadService,typeTemplateService){
 
     //定义数据结构
 /*
@@ -52,13 +52,17 @@ $scope.entity={
     $scope.initTypeList=function(){
         goodsService.findByParentId(0).success(function (response) {
             $scope.typeList_1=response;
-            console.log($scope.typeList_1);
+
+            //console.log($scope.typeList_1);
         })
     };
 
     $scope.$watch('entity.goods.category1Id',function (newValue,oldValue) {
        goodsService.findByParentId(newValue).success(function (response) {
            $scope.typeList_2=response;
+           $scope.typeTempId=response[0].typeId;
+           showBrandList($scope.typeTempId);
+           console.log($scope.typeTempId);
            $scope.typeList_3={};
        }) 
     });
@@ -67,7 +71,12 @@ $scope.entity={
             $scope.typeList_3=response;
         })
     });
-
+    showBrandList=function(id){
+        typeTemplateService.findOne(id).success(function (response) {
+            $scope.brandList=JSON.parse(response.brandIds);
+            console.log($scope.brandList);
+        })
+    };
 	
     //读取列表数据绑定到表单中  
 	$scope.findAll=function(){

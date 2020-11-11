@@ -27,6 +27,7 @@
 	<script src="../js/controller/goodsController.js"></script>
 	<script src="../js/service/goodsService.js"></script>
 	<script src="../js/service/uploadService.js"></script>
+    <script src="../js/service/typeTemplateService.js"></script>
 
     
     
@@ -82,7 +83,7 @@
 		                           	  				<select ng-model="entity.goods.category3Id"  ng-options="item.id as item.name for item in typeList_3" class="form-control select-sm" ></select>
 		                              			</td>
 		                              			<td>
-		                           	  				模板ID:19
+		                           	  				模板ID:{{typeTempId}}
 		                              			</td>
 		                           	  		</tr>
 		                           	  	</table>
@@ -97,7 +98,7 @@
 		                           
 		                           <div class="col-md-2 title">品牌</div>
 		                           <div class="col-md-10 data">
-		                              <select class="form-control" ></select>
+		                              <select class="form-control" ng-model="entity.goods.brandId" ng-options="item.id as item.text for item in brandList"></select>
 		                           </div>
 		
 								   <div class="col-md-2 title">副标题</div>
