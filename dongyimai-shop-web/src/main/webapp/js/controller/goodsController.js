@@ -2,7 +2,8 @@
 app.controller('goodsController' ,function($scope,goodsService,uploadService){
 
     //定义数据结构
-/*    $scope.entity={
+/*
+$scope.entity={
         goods:{},
         goodsDesc:{
             itemImages:[{
@@ -10,10 +11,16 @@ app.controller('goodsController' ,function($scope,goodsService,uploadService){
                     url:{}
                 }]
         }
-    };*/
+    };
+*/
 
     $scope.entity={
-        goods:{},
+        goods:{
+            category1Id:{},
+            category2Id:{},
+            category3Id:{}
+
+        },
         goodsDesc:{
             itemImages:[]
         }
@@ -40,6 +47,27 @@ app.controller('goodsController' ,function($scope,goodsService,uploadService){
 	$scope.removeImage=function(index){
 	    $scope.entity.goodsDesc.itemImages.splice(index,1);
     };
+
+	//初始化商品分类列表
+    $scope.initTypeList=function(){
+        goodsService.findByParentId(0).success(function (response) {
+            $scope.typeList_1=response;
+            console.log($scope.typeList_1);
+        })
+    };
+
+    $scope.$watch('entity.goods.category1Id',function (newValue,oldValue) {
+       goodsService.findByParentId(newValue).success(function (response) {
+           $scope.typeList_2=response;
+           $scope.typeList_3={};
+       }) 
+    });
+    $scope.$watch('entity.goods.category2Id',function (newValue,oldValue) {
+        goodsService.findByParentId(newValue).success(function (response) {
+            $scope.typeList_3=response;
+        })
+    });
+
 	
     //读取列表数据绑定到表单中  
 	$scope.findAll=function(){
