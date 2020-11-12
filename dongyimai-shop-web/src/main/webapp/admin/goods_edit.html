@@ -28,7 +28,7 @@
 	<script src="../js/service/goodsService.js"></script>
 	<script src="../js/service/uploadService.js"></script>
     <script src="../js/service/typeTemplateService.js"></script>
-    <script src="../js/service/specificationOptionService.js"></script>
+
 
     
     
@@ -140,7 +140,7 @@
                                 <div class="row data-type">                                  
 								 <!-- 颜色图片 -->
 								 <div class="btn-group">
-					                 <button type="button" class="btn btn-default" title="新建" data-target="#uploadModal"  data-toggle="modal"  ><i class="fa fa-file-o"></i> 新建</button>
+					                 <button type="button" ng-click="clear()" class="btn btn-default" title="新建" data-target="#uploadModal"  data-toggle="modal"  ><i class="fa fa-file-o"></i> 新建</button>
                              		                 
 					             </div>
 								 
@@ -187,12 +187,12 @@
                             	<div class="row data-type">
 	                            	<div class="col-md-2 title">是否启用规格</div>
 			                        <div class="col-md-10 data">
-			                        	<input type="checkbox" >			                           
+			                        	<input type="checkbox" ng-model="entity.goods.isEnableSpec" ng-true-value="1" ng-false-value="0" >
 			                        </div>
                             	</div>
                             	<p>
                             	
-                            	<div>
+                            	<div ng-if="entity.goods.isEnableSpec==1">
                             	
 	                                <div class="row data-type">
 	                                
@@ -231,16 +231,16 @@
 										            </td>
 
 										            <td>
-										           		<input class="form-control"  placeholder="价格">
+										           		<input class="form-control" ng-model="item.price"  placeholder="价格">
 										            </td>
 										            <td>
-										            	<input class="form-control" placeholder="库存数量">
+										            	<input class="form-control" ng-model="item.num" placeholder="库存数量">
 										            </td>
 										            <td>
-										             	<input type="checkbox" >
+										             	<input type="checkbox" ng-model="item.status" ng-true-value="1" ng-false-value="0">
 										            </td>
 										            <td>
-										                <input type="checkbox" >									             	
+										                <input type="checkbox" ng-model="item.isDefault" ng-true-value="1" ng-false-value="0">
 										            </td>
 						                      </tr>
 
@@ -300,7 +300,9 @@
 					                </button>	
 					            </td>
 								<td>
-									<img  src="{{image_entity.url}}" width="200px" height="200px">
+                                    <span ng-if="image_entity.url!=null">
+									    <img  src="{{image_entity.url}}" width="200px" height="200px">
+                                    </span>
 								</td>
 							</tr>						
 						</table>

@@ -107,7 +107,7 @@ public class GoodsController {
 	}
 	
 		/**
-	 * 查询+分页
+	 * 查询+分页+根据登录的id返回自己的商品列表
 	 * @param goods
 	 * @param page
 	 * @param rows
@@ -115,6 +115,7 @@ public class GoodsController {
 	 */
 	@RequestMapping("/search")
 	public PageResult search(@RequestBody TbGoods goods, int page, int rows  ){
+		goods.setSellerId(SecurityContextHolder.getContext().getAuthentication().getName());
 		return goodsService.findPage(goods, page, rows);		
 	}
 	

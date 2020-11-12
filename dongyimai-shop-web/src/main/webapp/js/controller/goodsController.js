@@ -50,15 +50,16 @@ $scope.entity={
 		"attributeName": "屏幕尺寸",
 		"attributeValue": ["6寸", "5寸"]
 	}]
-	*/
+*/
 
+    //上传文件代码
 	$scope.image_entity={};
 	$scope.upload=function(){
 		uploadService.upload().success(function (response) {
 			if(response.message){
-				console.log(response.message);
+				//console.log(response.message);
 				$scope.image_entity.url=response.message;
-				console.log("imageurl="+$scope.image_entity.url);
+				//console.log("imageurl="+$scope.image_entity.url);
 			}else {
 				alert(response.message);
 			}
@@ -67,7 +68,7 @@ $scope.entity={
 
 	$scope.addToImageList=function(){
 	    $scope.entity.goodsDesc.itemImages.push($scope.image_entity);
-	    console.log($scope.image_entity.url);
+	    //console.log($scope.image_entity.url);
     };
 
 	$scope.removeImage=function(index){
@@ -101,6 +102,8 @@ $scope.entity={
        }) 
     });
 
+
+
     //更新specificationItems
 	$scope.updateSpecItems=function($event,name,value){
 		var object=searchAttrName($scope.entity.goodsDesc.specificationItems,name);
@@ -116,7 +119,7 @@ $scope.entity={
 		}else{
 			$scope.entity.goodsDesc.specificationItems.push({'attributeName':name,'attributeValue':[value]});
 		}
-		console.log($scope.entity.goodsDesc.specificationItems);
+		//console.log($scope.entity.goodsDesc.specificationItems);
 	}
 	searchAttrName=function(list,name){
 		for(var i=0;i<list.length;i++){
@@ -136,7 +139,7 @@ $scope.entity={
 			$scope.entity.itemList=$scope.deepClone($scope.entity.itemList,object[i].attributeName,object[i].attributeValue);
 		}
 	};
-
+	//深度克隆
 	$scope.deepClone=function(list,name,value){
 		var newList=[];
 		for(var i=0;i<list.length;i++){
@@ -150,7 +153,11 @@ $scope.entity={
 		return newList;
 	};
 
-
+	//清空页面中增加图片的的属性
+	$scope.clear=function(){
+	    $scope.image_entity={};
+	    $("#file").val('');
+    }
 
 
 
@@ -163,7 +170,7 @@ $scope.entity={
     });
 
     GetSpecList=function(id){
-        console.log("id="+id);
+        //console.log("id="+id);
         typeTemplateService.getSpecList(id).success(function (response) {
             $scope.specIds=response;
         })
@@ -198,22 +205,22 @@ $scope.entity={
 	};
 	
 	//分页
-	$scope.findPage=function(page,rows){			
+	$scope.findPage=function(page,rows){
 		goodsService.findPage(page,rows).success(
 			function(response){
-				$scope.list=response.rows;	
+				$scope.list=response.rows;
 				$scope.paginationConf.totalItems=response.total;//更新总记录数
-			}			
+			}
 		);
 	};
-	
-	//查询实体 
-	$scope.findOne=function(id){				
+
+	//查询实体
+	$scope.findOne=function(id){
 		goodsService.findOne(id).success(
 			function(response){
-				$scope.entity= response;					
+				$scope.entity= response;
 			}
-		);				
+		);
 	};
 	
 	//保存 
@@ -240,35 +247,33 @@ $scope.entity={
 			}		
 		);				
 	}
-	
-	 
-	//批量删除 
-	$scope.dele=function(){			
-		//获取选中的复选框			
+
+
+	//批量删除
+	$scope.dele=function(){
+		//获取选中的复选框
 		goodsService.dele( $scope.selectIds ).success(
 			function(response){
 				if(response.success){
 					$scope.reloadList();//刷新列表
 					$scope.selectIds=[];
-				}						
-			}		
-		);				
-	}
-	
-	$scope.searchEntity={};//定义搜索对象 
-	
+				}
+			}
+		);
+	};
+
+	$scope.searchEntity={};//定义搜索对象
+
 	//搜索
-	$scope.search=function(page,rows){			
+	$scope.search=function(page,rows){
 		goodsService.search(page,rows,$scope.searchEntity).success(
 			function(response){
-				$scope.list=response.rows;	
+				$scope.list=response.rows;
 				$scope.paginationConf.totalItems=response.total;//更新总记录数
-			}			
+			}
 		);
 	}
-	
-	$scope.findByParentId=function () {
-		
-	}
+
+
     
 });	
