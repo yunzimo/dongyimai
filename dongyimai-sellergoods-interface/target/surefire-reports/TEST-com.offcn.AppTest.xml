@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.offcn.AppTest" time="0.047" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.offcn.AppTest" time="0.053" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -18,7 +18,7 @@
     <property name="user.country" value="CN"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_241\jre\bin"/>
-    <property name="sun.java.command" value="C:\Users\yunzi\AppData\Local\Temp\surefire1172297893501358794\surefirebooter9000861055127464224.jar C:\Users\yunzi\AppData\Local\Temp\surefire1172297893501358794 2020-11-12T09-23-31_673-jvmRun1 surefire1293813183651832798tmp surefire_38826915059974105860tmp"/>
+    <property name="sun.java.command" value="C:\Users\yunzi\AppData\Local\Temp\surefire7996111995189689743\surefirebooter6495830072708823024.jar C:\Users\yunzi\AppData\Local\Temp\surefire7996111995189689743 2020-11-12T21-32-20_157-jvmRun1 surefire4126854235667192751tmp surefire_32924880656047730319tmp"/>
     <property name="surefire.test.class.path" value="D:\Desktop\javaproject\IdeaProjects\dongyimai-git\dongyimai-sellergoods-interface\target\test-classes;D:\Desktop\javaproject\IdeaProjects\dongyimai-git\dongyimai-sellergoods-interface\target\classes;D:\Desktop\javaproject\IdeaProjects\dongyimai-git\dongyimai-pojo\target\dongyimai-pojo-1.0.jar;D:\Desktop\javaproject\LocalResp\junit\junit\4.11\junit-4.11.jar;D:\Desktop\javaproject\LocalResp\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\yunzi"/>
@@ -32,7 +32,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="C:\Users\yunzi\AppData\Local\Temp\surefire1172297893501358794\surefirebooter9000861055127464224.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\yunzi\AppData\Local\Temp\surefire7996111995189689743\surefirebooter6495830072708823024.jar"/>
     <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.8.0_241\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_241\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_241\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_241\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_241\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_241\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_241\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_241\jre\classes"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
@@ -62,5 +62,5 @@
     <property name="maven.repo.local" value="D:\Desktop\javaproject\LocalResp"/>
     <property name="java.class.version" value="52.0"/>
   </properties>
-  <testcase name="shouldAnswerWithTrue" classname="com.offcn.AppTest" time="0"/>
+  <testcase name="shouldAnswerWithTrue" classname="com.offcn.AppTest" time="0.001"/>
 </testsuite>
