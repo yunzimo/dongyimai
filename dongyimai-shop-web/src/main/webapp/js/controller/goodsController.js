@@ -23,9 +23,34 @@ $scope.entity={
         },
         goodsDesc:{
             itemImages:[],
-            customAttributeItems:[]
-        }
+            customAttributeItems:[],
+            specificationItems:[]  //规格
+        },
+		itemList:[
+				{
+					spec:{},
+					/*{
+						"机身内存":"16G",
+						"网络":"联通3G"
+					}*/
+
+					price:0,
+					num:99999,
+					status:'0',
+					isDefault:'0'
+				}
+			]
     };
+
+
+/*	[{
+		"attributeName": "网络制式",
+		"attributeValue": ["移动3G", "移动4G"]
+	}, {
+		"attributeName": "屏幕尺寸",
+		"attributeValue": ["6寸", "5寸"]
+	}]
+	*/
 
 	$scope.image_entity={};
 	$scope.upload=function(){
@@ -66,12 +91,70 @@ $scope.entity={
            $scope.entity.goods.typeTemplateId=response[0].typeId;
 
            //初始化需要模板的数据
-           InitTemp($scope.typeTempId);
+           InitTemp($scope.entity.goods.typeTemplateId);
 
-           //console.log($scope.typeTempId);
+           //处理规格选项
+           GetSpecList($scope.entity.goods.typeTemplateId);
+
+           //console.log($scope.entity.goods.typeTemplateId);
            $scope.typeList_3={};
        }) 
     });
+
+    //更新specificationItems
+	$scope.updateSpecItems=function($event,name,value){
+		var object=searchAttrName($scope.entity.goodsDesc.specificationItems,name);
+		if(object!=null){
+			if($event.target.checked){
+				object.attributeValue.push(value);
+			}else {
+				 object.attributeValue.splice(object.attributeValue.indexOf(value),1);
+				 if(object.attributeValue.length==0){
+				 	$scope.entity.goodsDesc.specificationItems.splice($scope.entity.goodsDesc.specificationItems.indexOf(object),1);
+				 }
+			}
+		}else{
+			$scope.entity.goodsDesc.specificationItems.push({'attributeName':name,'attributeValue':[value]});
+		}
+		console.log($scope.entity.goodsDesc.specificationItems);
+	}
+	searchAttrName=function(list,name){
+		for(var i=0;i<list.length;i++){
+			if(list[i]['attributeName']==name){
+				return list[i];
+			}
+		}
+		return null;
+	};
+
+	//更新列表
+	$scope.createList=function(){
+		$scope.entity.itemList=[{spec:{},price:0,num:99999,status:'0',isDefault:'0'}];//初始
+
+		var object=$scope.entity.goodsDesc.specificationItems;
+		for(var i=0;i<object.length;i++){
+			$scope.entity.itemList=$scope.deepClone($scope.entity.itemList,object[i].attributeName,object[i].attributeValue);
+		}
+	};
+
+	$scope.deepClone=function(list,name,value){
+		var newList=[];
+		for(var i=0;i<list.length;i++){
+			var oldRow=list[i];
+			for(var j=0;j<value.length;j++){
+				var newRow=JSON.parse(JSON.stringify(oldRow));
+				newRow.spec[name]=value[j];
+				newList.push(newRow);
+			}
+		}
+		return newList;
+	};
+
+
+
+
+
+
     //监控第二个下拉框的改变
     $scope.$watch('entity.goods.category2Id',function (newValue,oldValue) {
         goodsService.findByParentId(newValue).success(function (response) {
@@ -79,12 +162,27 @@ $scope.entity={
         })
     });
 
+    GetSpecList=function(id){
+        console.log("id="+id);
+        typeTemplateService.getSpecList(id).success(function (response) {
+            $scope.specIds=response;
+        })
+    };
+
+
+
     //关于模板信息的初始化
     InitTemp=function(id){
         typeTemplateService.findOne(id).success(function (response) {
             $scope.brandList=JSON.parse(response.brandIds);
             $scope.entity.goodsDesc.customAttributeItems=JSON.parse(response.customAttributeItems);
-            console.log($scope.brandList);
+
+/*            $scope.specIds=JSON.parse(response.specIds);
+            console.log($scope.specIds);
+            for(var i=0;i<$scope.specIds.length;i++){
+
+                $scope.specIds[i].specOptionlist=specificationOptionService.findBySpecId($scope.specIds[i].id);
+            }*/
         })
     };
 

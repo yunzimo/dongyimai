@@ -28,6 +28,7 @@
 	<script src="../js/service/goodsService.js"></script>
 	<script src="../js/service/uploadService.js"></script>
     <script src="../js/service/typeTemplateService.js"></script>
+    <script src="../js/service/specificationOptionService.js"></script>
 
     
     
@@ -83,7 +84,7 @@
 		                           	  				<select ng-model="entity.goods.category3Id"  ng-options="item.id as item.name for item in typeList_3" class="form-control select-sm" ></select>
 		                              			</td>
 		                              			<td>
-		                           	  				模板ID:{{typeTempId}}
+		                           	  				模板ID:{{entity.goods.typeTemplateId}}
 		                              			</td>
 		                           	  		</tr>
 		                           	  	</table>
@@ -98,7 +99,7 @@
 		                           
 		                           <div class="col-md-2 title">品牌</div>
 		                           <div class="col-md-10 data">
-		                              <select class="form-control" ng-model="entity.goods.brandId" ng-repeat="item.id as item.name for item in brandList"></select>
+		                              <select class="form-control" ng-model="entity.goods.brandId" ng-options="item.id as item.text for item in brandList"></select>
 		                           </div>
 		
 								   <div class="col-md-2 title">副标题</div>
@@ -171,18 +172,13 @@
                             <!--扩展属性-->
                             <div class="tab-pane" id="customAttribute">
                                 <div class="row data-type">                                
-	                                <div>
-		                                <div class="col-md-2 title">扩展属性1</div>
+	                                <div ng-repeat="item in entity.goodsDesc.customAttributeItems">
+		                                <div class="col-md-2 title">{{item.text}}</div>
 				                        <div class="col-md-10 data">
-				                              <input class="form-control" placeholder="扩展属性1">	            	 
+				                              <input ng-model="item.value" class="form-control" placeholder="{{item.text}}">
 				                        </div>
 	                                </div>       
-									<div>
-		                                <div class="col-md-2 title">扩展属性2</div>
-				                        <div class="col-md-10 data">
-				                              <input class="form-control" placeholder="扩展属性2">	            	 
-				                        </div>
-	                                </div>  									
+
                                 </div>
                             </div>
                       
@@ -200,48 +196,27 @@
                             	
 	                                <div class="row data-type">
 	                                
-		                                <div>
-			                                <div class="col-md-2 title">屏幕尺寸</div>
+		                                <div ng-repeat="item in specIds">
+			                                <div class="col-md-2 title">{{item.text}}</div>
 					                        <div class="col-md-10 data">
 					                               
-					                            <span>
-					                            	<input  type="checkbox" >4.0					                            				                            	
-					                            </span>  	
-												<span>
-					                            	<input  type="checkbox" >4.5					                            				                            	
+					                            <span ng-repeat="op in item.option">
+					                            	<input  type="checkbox" ng-click="updateSpecItems($event,item.text,op.optionName)" >{{op.optionName}}
 					                            </span>
-												<span>
-					                            	<input  type="checkbox" >5.0					                            				                            	
-					                            </span>												
-					                            	
+
 					                        </div>
-		                                </div>   
-										<div>
-			                                <div class="col-md-2 title">网络制式</div>
-					                        <div class="col-md-10 data">
-					                               
-					                            <span>
-					                            	<input  type="checkbox" >2G					                            				                            	
-					                            </span>  	
-												<span>
-					                            	<input  type="checkbox" >3G					                            				                            	
-					                            </span>
-												<span>
-					                            	<input  type="checkbox" >4G					                            				                            	
-					                            </span>												
-					                            	
-					                        </div>
-		                                </div>  
-		                                                                                  
+		                                </div>
+										{{entity.goodsDesc.specificationItems}}
 	                                </div>
-	
+
 	                                
 	                                <div class="row data-type">
 	                                	 <table class="table table-bordered table-striped table-hover dataTable">
 						                    <thead>
-						                        <tr>					                          
-												    <th class="sorting">屏幕尺寸</th>
-													<th class="sorting">网络制式</th>
+						                        <tr>
+
+												    <th class="sorting" ng-repeat="pojo in entity.goodsDesc.specificationItems">{{pojo.attributeName}}</th>
+
 												    <th class="sorting">价格</th>
 												    <th class="sorting">库存</th>
 												    <th class="sorting">是否启用</th>
@@ -249,13 +224,11 @@
 											    </tr>
 								            </thead>
 						                    <tbody>
-						                      <tr>					                           
-										            <td>
-										            	4.0
+						                      <tr ng-repeat="item in entity.itemList">
+										            <td ng-repeat="pojo in entity.goodsDesc.specificationItems">
+                                                        {{item.spec[pojo.attributeName]}}
 										            </td>
-													<td>
-										            	3G
-										            </td>
+
 										            <td>
 										           		<input class="form-control"  placeholder="价格">
 										            </td>
@@ -269,66 +242,9 @@
 										                <input type="checkbox" >									             	
 										            </td>
 						                      </tr>
-											  <tr>					                           
-										            <td>
-										            	4.0
-										            </td>
-													<td>
-										            	4G
-										            </td>
-										            <td>
-										           		<input class="form-control"  placeholder="价格">
-										            </td>
-										            <td>
-										            	<input class="form-control" placeholder="库存数量">
-										            </td>
-										            <td>
-										             	<input type="checkbox" >
-										            </td>
-										            <td>
-										                <input type="checkbox" >									             	
-										            </td>
-						                      </tr>
-											  <tr>					                           
-													<td>
-										            	5.0
-										            </td>
-													<td>
-										            	3G
-										            </td>
-										            <td>
-										           		<input class="form-control"  placeholder="价格">
-										            </td>
-										            <td>
-										            	<input class="form-control" placeholder="库存数量">
-										            </td>
-										            <td>
-										             	<input type="checkbox" >
-										            </td>
-										            <td>
-										                <input type="checkbox" >									             	
-										            </td>
-						                      </tr>
-											  <tr>					                           
-													<td>
-										            	5.0
-										            </td>
-													<td>
-										            	4G
-										            </td>
-										            <td>
-										           		<input class="form-control"  placeholder="价格">
-										            </td>
-										            <td>
-										            	<input class="form-control" placeholder="库存数量">
-										            </td>
-										            <td>
-										             	<input type="checkbox" >
-										            </td>
-										            <td>
-										                <input type="checkbox" >									             	
-										            </td>
-						                      </tr>
+
+
+
 											  
 						                    </tbody>
 									 	</table>

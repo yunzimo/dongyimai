@@ -1,5 +1,7 @@
 package com.offcn.service;
 import java.util.List;
+import java.util.Map;
+
 import com.offcn.pojo.TbTypeTemplate;
 
 import com.offcn.entity.PageResult;
@@ -57,5 +59,7 @@ public interface TypeTemplateService {
 	 * @return
 	 */
 	public PageResult findPage(TbTypeTemplate type_template, int pageNum, int pageSize);
+
+	public List<Map> getSpecList(Long id);
 	
 }

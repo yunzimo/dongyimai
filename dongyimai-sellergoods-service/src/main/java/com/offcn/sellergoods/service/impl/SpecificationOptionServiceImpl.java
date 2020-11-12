@@ -97,5 +97,14 @@ public class SpecificationOptionServiceImpl implements SpecificationOptionServic
 		Page<TbSpecificationOption> page= (Page<TbSpecificationOption>)specificationOptionMapper.selectByExample(example);		
 		return new PageResult(page.getTotal(), page.getResult());
 	}
-	
+
+	@Override
+	public List<TbSpecificationOption> findBySpecId(Long specId) {
+		TbSpecificationOptionExample example=new TbSpecificationOptionExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andSpecIdEqualTo(specId);
+		List<TbSpecificationOption> list = specificationOptionMapper.selectByExample(example);
+		return list;
+	}
+
 }

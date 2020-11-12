@@ -28,5 +28,10 @@ app.service('typeTemplateService',function($http){
 	//搜索
 	this.search=function(page,rows,searchEntity){
 		return $http.post('../typeTemplate/search.do?page='+page+"&rows="+rows, searchEntity);
-	}    	
+	}
+
+	this.getSpecList=function (id) {
+		console.log("id======"+id);
+		return $http.post('../typeTemplate/getSpecList.do?id='+id);
+	}
 });

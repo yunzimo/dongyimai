@@ -1,6 +1,12 @@
 package com.offcn.sellergoods.service.impl;
 import java.util.List;
+import java.util.Map;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.offcn.mapper.TbSpecificationOptionMapper;
+import com.offcn.pojo.TbSpecificationOption;
+import com.offcn.pojo.TbSpecificationOptionExample;
 import com.offcn.service.TypeTemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.dubbo.config.annotation.Service;
@@ -24,6 +30,8 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
 
 	@Autowired
 	private TbTypeTemplateMapper typeTemplateMapper;
+	@Autowired
+	private TbSpecificationOptionMapper specificationOptionMapper;
 	
 	/**
 	 * 查询全部
@@ -103,5 +111,24 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
 		Page<TbTypeTemplate> page= (Page<TbTypeTemplate>)typeTemplateMapper.selectByExample(example);		
 		return new PageResult(page.getTotal(), page.getResult());
 	}
-	
+
+	@Override
+	public List<Map> getSpecList(Long id) {
+		System.out.println("id======="+id);
+		TbTypeTemplate typeTemplate = typeTemplateMapper.selectByPrimaryKey(id);
+
+		String specIds = typeTemplate.getSpecIds();
+
+		List<Map> maps = JSON.parseArray(typeTemplate.getSpecIds(), Map.class);
+		for(Map map:maps){
+			TbSpecificationOptionExample example=new TbSpecificationOptionExample();
+			TbSpecificationOptionExample.Criteria criteria = example.createCriteria();
+			criteria.andSpecIdEqualTo(new Long((Integer)map.get("id")));
+
+			List<TbSpecificationOption> optionList = specificationOptionMapper.selectByExample(example);
+			map.put("option",optionList);
+		}
+		return maps;
+	}
+
 }
