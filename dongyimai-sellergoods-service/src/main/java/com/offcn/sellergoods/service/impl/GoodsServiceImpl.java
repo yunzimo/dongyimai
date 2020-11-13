@@ -146,8 +146,17 @@ public class GoodsServiceImpl implements GoodsService {
      * @return
      */
     @Override
-    public TbGoods findOne(Long id) {
-        return goodsMapper.selectByPrimaryKey(id);
+    public Goods findOne(Long id) {
+        Goods goods=new Goods();
+        goods.setGoods(goodsMapper.selectByPrimaryKey(id));
+        goods.setGoodsDesc(goodsDescMapper.selectByPrimaryKey(id));
+        TbItemExample example=new TbItemExample();
+        TbItemExample.Criteria criteria = example.createCriteria();
+        criteria.andGoodsIdEqualTo(id);
+        List<TbItem> itemList = itemMapper.selectByExample(example);
+        goods.setItemList(itemList);
+        System.out.println("findOne============"+goods);
+        return goods;
     }
 
     /**

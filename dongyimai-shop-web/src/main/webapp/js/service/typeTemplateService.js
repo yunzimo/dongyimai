@@ -31,7 +31,7 @@ app.service('typeTemplateService',function($http){
 	}
 
 	this.getSpecList=function (id) {
-		console.log("id======"+id);
+		//console.log("id======"+id);
 		return $http.post('../typeTemplate/getSpecList.do?id='+id);
 	}
 });

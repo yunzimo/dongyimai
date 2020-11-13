@@ -1,5 +1,5 @@
  //商品控制层 
-app.controller('goodsController' ,function($scope,$controller,goodsService,uploadService,typeTemplateService,itemCatService){
+app.controller('goodsController' ,function($scope,$controller,$location,goodsService,uploadService,typeTemplateService,itemCatService){
 
 
     $controller('baseController',{$scope:$scope});
@@ -54,6 +54,24 @@ $scope.entity={
 	}]
 */
 
+	$scope.checkValue=function(name,value){
+
+		var objet=searchAttrName($scope.entity.goodsDesc.specificationItems,name);
+
+		if(objet!=null){
+			if(objet.attributeValue.indexOf(value)>=0){
+				return true;
+			}else return false;
+
+/*			for(var i=0;i<objet['attributeValue'].length;i++){
+				if(objet['attributeValue'][i]==value){
+					return true;
+				}
+			}*/
+		}
+		return false;
+	};
+
     //上传文件代码
 	$scope.image_entity={};
 	$scope.upload=function(){
@@ -90,19 +108,51 @@ $scope.entity={
     $scope.$watch('entity.goods.category1Id',function (newValue,oldValue) {
        goodsService.findByParentId(newValue).success(function (response) {
            $scope.typeList_2=response;
-           //获得模板ID
-           $scope.entity.goods.typeTemplateId=response[0].typeId;
-
-           //初始化需要模板的数据
-           InitTemp($scope.entity.goods.typeTemplateId);
-
-           //处理规格选项
-           GetSpecList($scope.entity.goods.typeTemplateId);
-
-           //console.log($scope.entity.goods.typeTemplateId);
            $scope.typeList_3={};
        }) 
     });
+
+	//监控第二个下拉框的改变
+	$scope.$watch('entity.goods.category2Id',function (newValue,oldValue) {
+		goodsService.findByParentId(newValue).success(function (response) {
+			$scope.typeList_3=response;
+		})
+	});
+	//监控第三个下拉框的改变，决定typeId
+	$scope.$watch('entity.goods.category3Id',function (newValue,oldValue) {
+		itemCatService.findOne(newValue).success(function (response) {
+			//console.log(response);
+			$scope.entity.goods.typeTemplateId=response.typeId;
+		})
+	});
+
+	//监控typeId的改变，修改关于模板的所有数据
+	$scope.$watch('entity.goods.typeTemplateId',function (newValue,oldValue) {
+
+		if(newValue){
+			console.log("newValue==="+newValue);
+			console.log("id==="+$location.search()['id']);
+			typeTemplateService.getSpecList(newValue).success(function (response) {
+				$scope.specIds=response;
+			});
+
+			typeTemplateService.findOne(newValue).success(function (response) {
+				//console.log(response);
+				$scope.brandList=JSON.parse(response.brandIds);
+				if($location.search()['id']==null){
+					$scope.entity.goodsDesc.customAttributeItems=JSON.parse(response.customAttributeItems);
+				}
+			});
+
+			if ($location.search()["id"] == null){
+				$scope.entity.goodsDesc.specificationItems = [];
+				$scope.entity.itemList=[];
+			}
+		}
+
+	});
+
+
 
 
 
@@ -164,30 +214,12 @@ $scope.entity={
 
 
 
-    //监控第二个下拉框的改变
-    $scope.$watch('entity.goods.category2Id',function (newValue,oldValue) {
-        goodsService.findByParentId(newValue).success(function (response) {
-            $scope.typeList_3=response;
-        })
-    });
-
-    GetSpecList=function(id){
-        //console.log("id="+id);
-        typeTemplateService.getSpecList(id).success(function (response) {
-            $scope.specIds=response;
-        })
-    };
+    
 
 
 
-    //关于模板信息的初始化
-    InitTemp=function(id){
-        typeTemplateService.findOne(id).success(function (response) {
-            $scope.brandList=JSON.parse(response.brandIds);
-            $scope.entity.goodsDesc.customAttributeItems=JSON.parse(response.customAttributeItems);
 
-        })
-    };
+
 
 
 	
@@ -212,9 +244,22 @@ $scope.entity={
 
 	//查询实体
 	$scope.findOne=function(id){
+	    var id=$location.search()['id'];
+	    if(id==null){
+	        return;
+        }
+	    console.log(id);
 		goodsService.findOne(id).success(
 			function(response){
 				$scope.entity= response;
+                editor.html($scope.entity.goodsDesc.introduction);//将详情放入富文本编辑器中
+                $scope.entity.goodsDesc.itemImages = JSON.parse($scope.entity.goodsDesc.itemImages);//将字符串转换json对象
+                $scope.entity.goodsDesc.customAttributeItems = JSON.parse($scope.entity.goodsDesc.customAttributeItems);
+                $scope.entity.goodsDesc.specificationItems=JSON.parse($scope.entity.goodsDesc.specificationItems);
+                //$scope.entity.itemList=JSON.parse($scope.entity.itemList);
+				for(var i=0;i<$scope.entity.itemList.length;i++){
+					$scope.entity.itemList[i].spec=JSON.parse($scope.entity.itemList[i].spec);
+				}
 			}
 		);
 	};

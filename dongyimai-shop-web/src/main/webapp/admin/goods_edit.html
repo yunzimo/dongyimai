@@ -28,6 +28,8 @@
 	<script src="../js/service/goodsService.js"></script>
 	<script src="../js/service/uploadService.js"></script>
     <script src="../js/service/typeTemplateService.js"></script>
+	<script src="../js/service/itemCatService.js"></script>
+	<script src="../js/controller/baseController.js"></script>
 
 
     
@@ -35,7 +37,7 @@
 </head>
 
 <body class="hold-transition skin-red sidebar-mini"
-      ng-app="dongyimai" ng-controller="goodsController" ng-init="initTypeList()">
+      ng-app="dongyimai" ng-controller="goodsController" ng-init="initTypeList();findOne()">
 
             <!-- 正文区域 -->
             <section class="content">
@@ -201,13 +203,13 @@
 					                        <div class="col-md-10 data">
 					                               
 					                            <span ng-repeat="op in item.option">
-					                            	<input  type="checkbox" ng-click="updateSpecItems($event,item.text,op.optionName);createList()" >{{op.optionName}}
+					                            	<input  type="checkbox" ng-checked="checkValue(item.text,op.optionName)"  ng-click="updateSpecItems($event,item.text,op.optionName);createList()" >{{op.optionName}}
 					                            </span>
 
 					                        </div>
 		                                </div>
-										{{entity.goodsDesc.specificationItems}}<br>
-                                        {{entity.itemList}}
+									<!--	{{entity.goodsDesc.specificationItems}}<br>
+                                        {{entity.itemList}}-->
 	                                </div>
 
 	                                
