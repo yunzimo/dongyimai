@@ -323,11 +323,11 @@ $scope.entity={
 
     $scope.initCategory=function () {
         itemCatService.findAll().success(function (response) {
-            //$scope.itemCatList=response;
+
             for(var i=0;i<response.length;i++){
                 $scope.itemCatList[response[i]['id']]=response[i]['name'];
             }
-            //console.log($scope.itemCatList);
+
         })
     }
 

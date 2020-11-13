@@ -10,7 +10,7 @@ app.controller('baseController',function ($scope) {
     }
 
     $scope.reloadList=function(){
-        $scope.findPage($scope.paginationConf.currentPage,$scope.paginationConf.itemsPerPage);
+        $scope.search($scope.paginationConf.currentPage,$scope.paginationConf.itemsPerPage);
     };
 
     $scope.selectIds=[];

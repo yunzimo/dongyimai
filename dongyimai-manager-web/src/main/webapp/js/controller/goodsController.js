@@ -1,7 +1,9 @@
  //商品控制层 
-app.controller('goodsController' ,function($scope,$controller   ,goodsService){	
+app.controller('goodsController' ,function($scope,$controller,goodsService,itemCatService){
 	
 	$controller('baseController',{$scope:$scope});//继承
+
+
 	
     //读取列表数据绑定到表单中  
 	$scope.findAll=function(){
@@ -75,6 +77,21 @@ app.controller('goodsController' ,function($scope,$controller   ,goodsService){
 				$scope.paginationConf.totalItems=response.total;//更新总记录数
 			}			
 		);
+	};
+
+	//初始化状态数据结构
+	$scope.status = ["未申请","申请中","审核通过","已驳回"];
+
+	//初始化分类数据结构
+	$scope.itemCatList=[];
+
+	$scope.initCategory=function () {
+		itemCatService.findAll().success(function (response) {
+			for(var i=0;i<response.length;i++){
+				$scope.itemCatList[response[i]['id']]=response[i]['name'];
+			}
+
+		})
 	}
     
 });	
