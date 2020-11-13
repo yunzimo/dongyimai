@@ -75,7 +75,10 @@ public class GoodsServiceImpl implements GoodsService {
 
 		System.out.println("Goods表的属性======"+goods.getGoods());
 		System.out.println("GoodsDesc表的属性======="+goods.getGoodsDesc());
+        addItemList(goods);
+    }
 
+    public void addItemList(Goods goods) {
         //判断是否启用规格,设置固有属性，并通过setItem函数设置通用属性
         if("1".equals(goods.getGoods().getIsEnableSpec())){
 			List<TbItem> itemList = goods.getItemList();
@@ -135,8 +138,16 @@ public class GoodsServiceImpl implements GoodsService {
      * 修改
      */
     @Override
-    public void update(TbGoods goods) {
-        goodsMapper.updateByPrimaryKey(goods);
+    public void update(Goods goods) {
+        goodsDescMapper.updateByPrimaryKey(goods.getGoodsDesc());
+        goodsMapper.updateByPrimaryKey(goods.getGoods());
+
+        TbItemExample example=new TbItemExample();
+        TbItemExample.Criteria criteria = example.createCriteria();
+        criteria.andGoodsIdEqualTo(goods.getGoods().getId());
+        itemMapper.deleteByExample(example);
+        addItemList(goods);
+
     }
 
     /**
