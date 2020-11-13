@@ -112,7 +112,7 @@ public class GoodsController {
 	@RequestMapping("/search")
 	public PageResult search(@RequestBody TbGoods goods, int page, int rows  ){
 		//goods.setSellerId(SecurityContextHolder.getContext().getAuthentication().getName());
-		goods.setAuditStatus("0");
+		//goods.setAuditStatus("0");
 		return goodsService.findPage(goods, page, rows);		
 	}
 	

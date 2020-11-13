@@ -177,6 +177,11 @@ public class GoodsServiceImpl implements GoodsService {
     public void delete(Long[] ids) {
         for (Long id : ids) {
             goodsMapper.deleteByPrimaryKey(id);
+            goodsDescMapper.deleteByPrimaryKey(id);
+            TbItemExample example=new TbItemExample();
+            TbItemExample.Criteria criteria = example.createCriteria();
+            criteria.andGoodsIdEqualTo(id);
+            itemMapper.deleteByExample(example);
         }
     }
 

@@ -210,18 +210,6 @@ $scope.entity={
 	    $scope.image_entity={};
 	    $("#file").val('');
     }
-
-
-
-
-    
-
-
-
-
-
-
-
 	
     //读取列表数据绑定到表单中  
 	$scope.findAll=function(){
@@ -282,6 +270,7 @@ $scope.entity={
 		        	//清空对象和富文本
 		        	$scope.entity={};
 		        	editor.html("");
+		        	window.location.href="goods.html";
 				}else{
 					alert(response.message);
 				}

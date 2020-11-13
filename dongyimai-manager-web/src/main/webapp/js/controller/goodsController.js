@@ -28,7 +28,18 @@ app.controller('goodsController' ,function($scope,$controller,goodsService,itemC
 	$scope.findOne=function(id){				
 		goodsService.findOne(id).success(
 			function(response){
-				$scope.entity= response;					
+				$scope.entity= response;
+
+				// 查找默认SKU
+				for(var i=0;i<$scope.entity.itemList.length;i++){
+					if("1"==$scope.entity.itemList[i].isDefault){
+						$scope.entity.defaultItemId=$scope.entity.itemList[i].title;
+						//console.log($scope.entity.defaultItemId);
+						break;
+					}
+					//console.log($scope.entity.itemList[i].isDefault);
+				}
+				//console.log($scope.entity);
 			}
 		);				
 	}
@@ -80,7 +91,7 @@ app.controller('goodsController' ,function($scope,$controller,goodsService,itemC
 	};
 
 	//初始化状态数据结构
-	$scope.status = ["未申请","申请中","审核通过","已驳回"];
+	$scope.status = ["未审核","审核中","审核通过","已驳回"];
 
 	//初始化分类数据结构
 	$scope.itemCatList=[];
