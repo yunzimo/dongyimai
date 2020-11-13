@@ -1,5 +1,5 @@
  //内容控制层 
-app.controller('contentController' ,function($scope,$controller   ,contentService){	
+app.controller('contentController' ,function($scope,$controller,contentService){
 	
 	$controller('baseController',{$scope:$scope});//继承
 	

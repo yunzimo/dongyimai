@@ -101,6 +101,11 @@
             <version>1.0</version>
         </dependency>
         <dependency>
+            <groupId>com.offcn</groupId>
+            <artifactId>dongyimai-content-interface</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper</artifactId>
         </dependency>
