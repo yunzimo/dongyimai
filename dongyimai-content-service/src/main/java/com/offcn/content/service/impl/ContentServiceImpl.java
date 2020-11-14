@@ -101,5 +101,14 @@ public class ContentServiceImpl implements ContentService {
 		Page<TbContent> page= (Page<TbContent>)contentMapper.selectByExample(example);		
 		return new PageResult(page.getTotal(), page.getResult());
 	}
-	
+
+	@Override
+	public void updateStatus(Long[] ids, String status) {
+		for(Long id:ids){
+			TbContent tbContent = contentMapper.selectByPrimaryKey(id);
+			tbContent.setStatus(status);
+			contentMapper.updateByPrimaryKey(tbContent);
+		}
+	}
+
 }

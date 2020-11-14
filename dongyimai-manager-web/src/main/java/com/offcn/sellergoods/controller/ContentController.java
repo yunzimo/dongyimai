@@ -110,5 +110,16 @@ public class ContentController {
 	public PageResult search(@RequestBody TbContent content, int page, int rows  ){
 		return contentService.findPage(content, page, rows);		
 	}
+
+	@RequestMapping("/updateStatus")
+	public Result updateStatus(Long[] ids,String status){
+		try {
+			contentService.updateStatus(ids,status);
+			return new Result(true, "修改成功");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new Result(false, "修改失败");
+		}
+	}
 	
 }

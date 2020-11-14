@@ -98,5 +98,17 @@ app.controller('contentController' ,function($scope,$controller,contentService,c
 			console.log($scope.contentCatList);
 		})
 	}
+
+	$scope.updateStatus=function (stauts) {
+		contentService.updateStatus($scope.selectIds,stauts).success(function (response) {
+			if(response.success){
+				alert(response.message);
+				$scope.reloadList();//刷新列表
+				$scope.selectIds=[];
+			}else {
+				alert(response.message);
+			}
+		})
+	}
     
 });	

@@ -57,5 +57,6 @@ public interface ContentService {
 	 * @return
 	 */
 	public PageResult findPage(TbContent content, int pageNum, int pageSize);
-	
+
+    public void updateStatus(Long[] ids, String status);
 }
