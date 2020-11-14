@@ -1,8 +1,24 @@
  //内容控制层 
-app.controller('contentController' ,function($scope,$controller,contentService,contentCategoryService){
+app.controller('contentController' ,function($scope,$controller,contentService,contentCategoryService,uploadService){
 	
 	$controller('baseController',{$scope:$scope});//继承
-	
+
+
+	//上传文件代码
+	$scope.image_entity={};
+	$scope.upload=function(){
+		uploadService.upload().success(function (response) {
+			if(response.message){
+				//console.log(response.message);
+				//$scope.image_entity.url=response.message;
+				$scope.entity.pic=response.message;
+			}else {
+				alert(response.message);
+			}
+		})
+	};
+
+
     //读取列表数据绑定到表单中  
 	$scope.findAll=function(){
 		contentService.findAll().success(
