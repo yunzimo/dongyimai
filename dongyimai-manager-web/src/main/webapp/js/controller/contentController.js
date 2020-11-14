@@ -1,5 +1,5 @@
  //内容控制层 
-app.controller('contentController' ,function($scope,$controller,contentService){
+app.controller('contentController' ,function($scope,$controller,contentService,contentCategoryService){
 	
 	$controller('baseController',{$scope:$scope});//继承
 	
@@ -75,6 +75,12 @@ app.controller('contentController' ,function($scope,$controller,contentService){
 				$scope.paginationConf.totalItems=response.total;//更新总记录数
 			}			
 		);
+	};
+	$scope.findContentCatList=function () {
+		contentCategoryService.findAll().success(function (response) {
+			$scope.contentCatList=response;
+			console.log($scope.contentCatList);
+		})
 	}
     
 });	

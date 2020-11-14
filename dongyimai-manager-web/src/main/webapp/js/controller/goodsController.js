@@ -103,6 +103,19 @@ app.controller('goodsController' ,function($scope,$controller,goodsService,itemC
 			}
 
 		})
+	};
+
+
+	//统一修改商品的状态
+	$scope.updateStatus=function (statusValue) {
+		goodsService.updateStatus($scope.selectIds,statusValue).success(function (response) {
+			if(response){
+				$scope.reloadList();//刷新列表
+				$scope.selectIds=[];
+			}else {
+				alert(response.message);
+			}
+		})
 	}
     
 });	

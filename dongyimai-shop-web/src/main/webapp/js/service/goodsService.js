@@ -31,5 +31,10 @@ app.service('goodsService',function($http){
 	};
 	this.findByParentId=function (parentId) {
 		return $http.post('../itemCat/findByParentId.do?parentId='+parentId);
-	}
+	};
+	this.updateMarket=function (ids,market) {
+		return $http.post('../goods/updateMarket.do?ids='+ids+"&&market="+market);
+	};
+
+
 });

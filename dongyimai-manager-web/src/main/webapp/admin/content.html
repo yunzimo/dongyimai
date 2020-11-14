@@ -23,9 +23,11 @@
     <script type="text/javascript" src="../js/service/contentService.js"></script>
     <script type="text/javascript" src="../js/controller/baseController.js"></script>
     <script type="text/javascript" src="../js/controller/contentController.js"></script>
+    <script src="../js/service/contentCategoryService.js"></script>
 
 </head>
-<body class="hold-transition skin-red sidebar-mini" ng-app="dongyimai" ng-controller="contentController">
+<body class="hold-transition skin-red sidebar-mini" ng-app="dongyimai" ng-controller="contentController"
+    ng-init="findContentCatList()">
 <!-- .box-body -->
 <div class="box-header with-border">
     <h3 class="box-title">内容管理</h3>
@@ -113,7 +115,7 @@
 
                         <td>内容类目ID</td>
 
-                        <td><input class="form-control" ng-model="entity.categoryId" placeholder="内容类目ID"></td>
+                        <td><select class="form-control" ng-options="item.id as item.name for item in contentCatList" ng-model="entity.categoryId" ></select></td>
 
                     </tr>
                     <tr>

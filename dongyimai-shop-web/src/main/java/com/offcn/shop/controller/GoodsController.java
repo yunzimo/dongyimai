@@ -14,6 +14,8 @@ import com.offcn.pojo.TbGoods;
 import com.offcn.entity.PageResult;
 import com.offcn.entity.Result;
 
+import javax.sound.midi.Soundbank;
+
 /**
  * 商品controller
  * @author Administrator
@@ -98,7 +100,7 @@ public class GoodsController {
 	@RequestMapping("/delete")
 	public Result delete(Long [] ids){
 		try {
-			goodsService.delete(ids);
+			goodsService.updateDelete(ids);
 			return new Result(true, "删除成功"); 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -117,6 +119,21 @@ public class GoodsController {
 	public PageResult search(@RequestBody TbGoods goods, int page, int rows  ){
 		goods.setSellerId(SecurityContextHolder.getContext().getAuthentication().getName());
 		return goodsService.findPage(goods, page, rows);		
+	}
+
+	@RequestMapping("/updateMarket")
+	public Result updateMarket(Long[] ids,String market){
+		try {
+
+			if(market.equals("undefined")){
+				market=null;
+			}
+			goodsService.updateMarket(ids,market);
+			return new Result(true, "状态更新成功成功");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new Result(false, "状态更新失败");
+		}
 	}
 	
 }

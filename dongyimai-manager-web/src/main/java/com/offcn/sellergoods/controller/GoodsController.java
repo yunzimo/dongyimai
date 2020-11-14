@@ -94,7 +94,7 @@ public class GoodsController {
 	@RequestMapping("/delete")
 	public Result delete(Long [] ids){
 		try {
-			goodsService.delete(ids);
+			goodsService.updateDelete(ids);
 			return new Result(true, "删除成功"); 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -111,9 +111,21 @@ public class GoodsController {
 	 */
 	@RequestMapping("/search")
 	public PageResult search(@RequestBody TbGoods goods, int page, int rows  ){
-		//goods.setSellerId(SecurityContextHolder.getContext().getAuthentication().getName());
-		//goods.setAuditStatus("0");
+
 		return goodsService.findPage(goods, page, rows);		
 	}
+
+	@RequestMapping("/updateStatus")
+	public Result updateStatus(Long[] ids,String status){
+
+		try {
+			goodsService.updateStatus(ids,status);
+			return new Result(true, "更新状态成功");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new Result(false, "更新状态失败");
+		}
+	}
+
 	
 }

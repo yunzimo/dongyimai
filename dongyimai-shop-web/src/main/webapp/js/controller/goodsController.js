@@ -307,6 +307,8 @@ $scope.entity={
 	//初始化状态数据结构
     $scope.status = ["未申请","申请中","审核通过","已驳回"];
 
+
+
     //初始化分类数据结构
     $scope.itemCatList=[];
 
@@ -318,7 +320,17 @@ $scope.entity={
             }
 
         })
-    }
+    };
+    $scope.updateMarket=function (market) {
+    	goodsService.updateMarket($scope.selectIds,market).success(function (response) {
+			if(response.success){
+				$scope.reloadList();//刷新列表
+				$scope.selectIds=[];
+			}else {
+				alert(response.message);
+			}
+		})
+	}
 
     
 });	

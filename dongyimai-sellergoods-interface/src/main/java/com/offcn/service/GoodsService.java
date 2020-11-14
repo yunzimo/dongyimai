@@ -52,6 +52,9 @@ public interface GoodsService {
 	 */
 	public void delete(Long[] ids);
 
+
+	public void updateDelete(Long[] ids);
+
 	/**
 	 * 分页
 	 * @param pageNum 当前页 码
@@ -59,5 +62,9 @@ public interface GoodsService {
 	 * @return
 	 */
 	public PageResult findPage(TbGoods goods, int pageNum, int pageSize);
-	
+
+    public void updateStatus(Long[] ids,String status);
+
+
+	public void updateMarket(Long[] ids, String market);
 }
