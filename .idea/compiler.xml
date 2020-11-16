@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="dongyimaicontentservice" />
         <module name="dongyimaicontentinterface" />
+        <module name="dongyimaiportalweb" />
         <module name="dongyimai-pojo" />
         <module name="dongyimai-sellergoods-interface" />
         <module name="dongyimai-manager-web" />

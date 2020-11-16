@@ -11,6 +11,7 @@ import com.offcn.pojo.TbContentExample.Criteria;
 import com.offcn.content.service.ContentService;
 
 import com.offcn.entity.PageResult;
+import org.springframework.data.redis.core.RedisTemplate;
 
 /**
  * 内容服务实现层
@@ -22,6 +23,10 @@ public class ContentServiceImpl implements ContentService {
 
 	@Autowired
 	private TbContentMapper contentMapper;
+
+	@Autowired
+	private RedisTemplate redisTemplate;
+
 	
 	/**
 	 * 查询全部
@@ -46,6 +51,10 @@ public class ContentServiceImpl implements ContentService {
 	 */
 	@Override
 	public void add(TbContent content) {
+		Long categoryId = content.getCategoryId();
+
+		//删除掉所有的categoryId和新添加的对象相同的content
+		redisTemplate.boundHashOps("content").delete(categoryId);
 		contentMapper.insert(content);		
 	}
 
@@ -55,6 +64,14 @@ public class ContentServiceImpl implements ContentService {
 	 */
 	@Override
 	public void update(TbContent content){
+
+		redisTemplate.boundHashOps("content").delete(content.getCategoryId());
+		TbContent oldContent = contentMapper.selectByPrimaryKey(content.getId());
+
+		//如果修改后的content的categoryId发生了变化，那么需要删除原来旧的所有categoryId的content
+		if(!oldContent.getCategoryId().equals(content.getCategoryId())){
+			redisTemplate.boundHashOps("content").delete(oldContent.getCategoryId());
+		}
 		contentMapper.updateByPrimaryKey(content);
 	}	
 	
@@ -74,6 +91,8 @@ public class ContentServiceImpl implements ContentService {
 	@Override
 	public void delete(Long[] ids) {
 		for(Long id:ids){
+			TbContent content = contentMapper.selectByPrimaryKey(id);
+			redisTemplate.boundHashOps("content").delete(content.getCategoryId());
 			contentMapper.deleteByPrimaryKey(id);
 		}		
 	}
@@ -109,6 +128,21 @@ public class ContentServiceImpl implements ContentService {
 			tbContent.setStatus(status);
 			contentMapper.updateByPrimaryKey(tbContent);
 		}
+	}
+
+	@Override
+	public List<TbContent> findByCategoryId(Long categoryId) {
+
+		List<TbContent> content = (List<TbContent>) redisTemplate.boundHashOps("content").get(categoryId);
+		if (content==null){
+			TbContentExample example=new TbContentExample();
+			Criteria criteria = example.createCriteria();
+			criteria.andCategoryIdEqualTo(categoryId);
+			content = contentMapper.selectByExample(example);
+			System.out.println("储存数据到redis中");
+			redisTemplate.boundHashOps("content").put(categoryId,content);
+		}
+		return content;
 	}
 
 }
