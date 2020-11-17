@@ -2,7 +2,7 @@ package com.offcn.shop.controller;
 import java.util.List;
 
 import com.offcn.entity.Goods;
-import com.offcn.service.GoodsService;
+import com.offcn.search.service.GoodsService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,8 +13,6 @@ import com.offcn.pojo.TbGoods;
 
 import com.offcn.entity.PageResult;
 import com.offcn.entity.Result;
-
-import javax.sound.midi.Soundbank;
 
 /**
  * 商品controller

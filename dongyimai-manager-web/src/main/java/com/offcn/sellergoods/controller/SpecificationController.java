@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.offcn.entity.Specification;
-import com.offcn.service.SpecificationService;
+import com.offcn.search.service.SpecificationService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

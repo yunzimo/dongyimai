@@ -1,7 +1,7 @@
 package com.offcn.sellergoods.controller;
 import java.util.List;
 
-import com.offcn.service.SpecificationOptionService;
+import com.offcn.search.service.SpecificationOptionService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

@@ -1,7 +1,7 @@
 package com.offcn.sellergoods.service.impl;
 import java.util.List;
 
-import com.offcn.service.GoodsDescService;
+import com.offcn.search.service.GoodsDescService;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;

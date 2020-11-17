@@ -6,17 +6,24 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="dongyimaicontentservice" />
-        <module name="dongyimaicontentinterface" />
         <module name="dongyimaiportalweb" />
+        <module name="dongyimai-search-service" />
+        <module name="dongyimai-common" />
         <module name="dongyimai-pojo" />
+        <module name="dongyimai-search-web" />
+        <module name="dongyimaicontentinterface" />
+        <module name="dongyimai-solr-util" />
+        <module name="dongyimaicontentservice" />
+        <module name="dongyimai-shop-web" />
         <module name="dongyimai-sellergoods-interface" />
         <module name="dongyimai-manager-web" />
-        <module name="dongyimai-common" />
         <module name="dongyimai-dao" />
-        <module name="dongyimai-shop-web" />
+        <module name="dongyimai-search-interface" />
         <module name="dongyimai-sellergoods-service" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="dongyimaisolrutil" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
 </project>

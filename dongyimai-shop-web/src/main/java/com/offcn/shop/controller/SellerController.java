@@ -2,7 +2,7 @@ package com.offcn.shop.controller;
 import java.util.Date;
 import java.util.List;
 
-import com.offcn.service.SellerService;
+import com.offcn.search.service.SellerService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

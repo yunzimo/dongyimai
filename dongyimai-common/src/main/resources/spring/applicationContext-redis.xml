@@ -8,8 +8,6 @@
         http://www.springframework.org/schema/redis http://www.springframework.org/schema/redis/spring-redis.xsd
     ">
 
-
-
 <!--    配置redis连接池-->
     <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
         <property name="maxWaitMillis" value="${redis.maxWaitMillis}"/>

@@ -9,8 +9,14 @@
     <file url="file://$PROJECT_DIR$/dongyimai-manager-web" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dongyimai-pojo" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dongyimai-portal-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dongyimai-search-interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dongyimai-search-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dongyimai-search-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dongyimai-search-web" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dongyimai-sellergoods-interface" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dongyimai-sellergoods-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dongyimai-shop-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dongyimai-solr-util" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dongyimaisolrutil" charset="UTF-8" />
   </component>
 </project>

@@ -4,7 +4,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.offcn.entity.PageResult;
 import com.offcn.entity.Result;
 import com.offcn.pojo.TbTypeTemplate;
-import com.offcn.service.TypeTemplateService;
+import com.offcn.search.service.TypeTemplateService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

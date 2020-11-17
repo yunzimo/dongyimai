@@ -18,6 +18,7 @@
       <module>dongyimai-content-interface</module>
     <module>dongyimai-content-service</module>
       <module>dongyimai-portal-web</module>
+      <module>dongyimai-solr-util</module>
 
   </modules>
 

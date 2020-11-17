@@ -2,8 +2,7 @@ package com.offcn.sellergoods.controller;
 import java.util.List;
 
 import com.offcn.entity.Goods;
-import com.offcn.service.GoodsService;
-import org.springframework.security.core.context.SecurityContextHolder;
+import com.offcn.search.service.GoodsService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

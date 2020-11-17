@@ -1,7 +1,7 @@
 package com.offcn.shop.ServiceImp;
 
 import com.offcn.pojo.TbSeller;
-import com.offcn.service.SellerService;
+import com.offcn.search.service.SellerService;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;

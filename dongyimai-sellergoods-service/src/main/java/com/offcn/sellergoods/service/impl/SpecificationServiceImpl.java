@@ -6,7 +6,7 @@ import com.offcn.entity.Specification;
 import com.offcn.mapper.TbSpecificationOptionMapper;
 import com.offcn.pojo.TbSpecificationOption;
 import com.offcn.pojo.TbSpecificationOptionExample;
-import com.offcn.service.SpecificationService;
+import com.offcn.search.service.SpecificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;

@@ -9,7 +9,7 @@ import com.offcn.entity.PageResult;
 import com.offcn.mapper.TbBrandMapper;
 import com.offcn.pojo.TbBrand;
 import com.offcn.pojo.TbBrandExample;
-import com.offcn.service.BrandService;
+import com.offcn.search.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;

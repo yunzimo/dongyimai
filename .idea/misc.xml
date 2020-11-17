@@ -5,6 +5,8 @@
     <file type="web" url="file://$PROJECT_DIR$/dongyimai-content-service" />
     <file type="web" url="file://$PROJECT_DIR$/dongyimai-manager-web" />
     <file type="web" url="file://$PROJECT_DIR$/dongyimai-portal-web" />
+    <file type="web" url="file://$PROJECT_DIR$/dongyimai-search-service" />
+    <file type="web" url="file://$PROJECT_DIR$/dongyimai-search-web" />
     <file type="web" url="file://$PROJECT_DIR$/dongyimai-sellergoods-service" />
     <file type="web" url="file://$PROJECT_DIR$/dongyimai-shop-web" />
     <type id="Spring" />
@@ -16,6 +18,9 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/dongyimai-search-interface/pom.xml" />
+        <option value="$PROJECT_DIR$/dongyimai-search-service/pom.xml" />
+        <option value="$PROJECT_DIR$/dongyimai-search-web/pom.xml" />
       </list>
     </option>
   </component>

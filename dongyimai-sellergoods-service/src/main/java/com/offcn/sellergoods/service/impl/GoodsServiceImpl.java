@@ -9,7 +9,7 @@ import com.alibaba.fastjson.JSON;
 import com.offcn.entity.Goods;
 import com.offcn.mapper.*;
 import com.offcn.pojo.*;
-import com.offcn.service.GoodsService;
+import com.offcn.search.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
