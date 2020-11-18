@@ -1,6 +1,7 @@
 package com.offcn.search.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.fastjson.JSONObject;
 import com.offcn.search.service.ItemSearchService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ public class ItemSearchController {
 
     @RequestMapping("/search")
     public Map<String, Object> search(@RequestBody Map searchMap){
+        //String map=JSONObject.toJSONString(searchMap);
         return itemSearchService.search(searchMap);
     }
 }

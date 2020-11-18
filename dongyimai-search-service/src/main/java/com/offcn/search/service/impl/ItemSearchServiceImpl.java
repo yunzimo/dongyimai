@@ -5,6 +5,7 @@ import com.alibaba.dubbo.config.annotation.Service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.offcn.pojo.TbItem;
+
 import com.offcn.search.service.ItemSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -155,6 +156,41 @@ public class ItemSearchServiceImpl implements ItemSearchService {
     public Map<String, Object> getItemList(Map searchMap) {
         Map<String, Object> map=new HashMap<>();
         HighlightQuery query=new SimpleHighlightQuery();//默认查所有
+
+
+        //添加筛选条件
+        if(!"".equals(searchMap.get("category"))){
+            Criteria criteria=new Criteria("item_category");
+            criteria.is(searchMap.get("category"));
+            query.addCriteria(criteria);
+        }
+        if(!"".equals(searchMap.get("brand"))){
+            Criteria criteria=new Criteria("item_brand");
+            criteria.is(searchMap.get("brand"));
+            query.addCriteria(criteria);
+        }
+        if(!"".equals(searchMap.get("price"))){
+            String str= (String) searchMap.get("price");
+            String[] split = str.split("-");
+
+            if(!split[0].equals("0")){
+                Criteria criteria=new Criteria("item_price").greaterThanEqual(split[0]);
+                query.addCriteria(criteria);
+            }
+            if(!split[1].equals("*")){
+                Criteria criteria=new Criteria("item_price").lessThanEqual(split[1]);
+                query.addCriteria(criteria);
+            }
+        }
+        Map<String,String> specMap= (Map<String, String>) searchMap.get("spec");
+        if(specMap.size()>0){
+            for(String key:specMap.keySet()){
+                Criteria criteria=new Criteria("item_spec_"+key);
+                criteria.is(specMap.get(key));
+                query.addCriteria(criteria);
+            }
+        }
+
         HighlightOptions options=new HighlightOptions().addField("item_title");
         options.setSimplePrefix("<span style='color:red;'>");
         options.setSimplePostfix("</span>");
