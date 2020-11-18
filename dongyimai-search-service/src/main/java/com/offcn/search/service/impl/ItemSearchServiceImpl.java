@@ -58,7 +58,13 @@ public class ItemSearchServiceImpl implements ItemSearchService {
         GroupOptions options = new GroupOptions().addGroupByField("item_category");
         query.setGroupOptions(options);
         //添加条件 select * from tb_item where item_keywords=? group by item_category
-        Criteria criteria = new Criteria("item_keywords").is(searchMap.get("keywords"));
+
+        //处理多个关键词的空格
+        String str = (String) searchMap.get("keywords");
+        String regex="\\s+";
+        String keywords=str.replaceAll(regex,"");
+
+        Criteria criteria = new Criteria("item_keywords").is(keywords);
         query.addCriteria(criteria);
 
         //分组分页对象
@@ -191,12 +197,38 @@ public class ItemSearchServiceImpl implements ItemSearchService {
             }
         }
 
+        //设置分页
+        Integer pageNo=null;
+        Integer pageSize=null;
+
+        if("".equals(searchMap.get("pageNo"))){
+            pageNo=1;
+        }else {
+            pageNo= (Integer) searchMap.get("pageNo");
+        }
+
+        if("".equals(searchMap.get("pageSize"))){
+            pageSize=10;
+        }else {
+            pageSize= (Integer) searchMap.get("pageSize");
+        }
+
+        query.setOffset((pageNo-1)*pageSize);  //分页起始下标
+        query.setRows(pageSize);
+
+
+        //高亮设置
         HighlightOptions options=new HighlightOptions().addField("item_title");
         options.setSimplePrefix("<span style='color:red;'>");
         options.setSimplePostfix("</span>");
         query.setHighlightOptions(options);
 
-        Criteria criteria=new Criteria("item_keywords").is(searchMap.get("keywords"));
+        //处理多个关键词的空格
+        String str = (String) searchMap.get("keywords");
+        String regex="\\s+";
+        String keywords=str.replaceAll(regex,"");
+
+        Criteria criteria=new Criteria("item_keywords").is(keywords);
         query.addCriteria(criteria);
         HighlightPage<TbItem> page = solrTemplate.queryForHighlightPage(query, TbItem.class);
 
@@ -270,22 +302,12 @@ public class ItemSearchServiceImpl implements ItemSearchService {
             ]
             },
 
-
-
     ]
         }*/
-
 
         //高亮入口对象
         for (HighlightEntry<TbItem> entry : page.getHighlighted()) {
             TbItem item =  entry.getEntity();//商品sku
-
-            //entry.getHighlights().get(0)第一行符合标题文本
-            //entry.getHighlights().get(0).getSnipplets().get(0)第一行符合标题文本的小片段
-
-
-
-
             if (entry.getHighlights().size() > 0 && entry.getHighlights().get(0).getSnipplets().size()>0){
                 item.setTitle(entry.getHighlights().get(0).getSnipplets().get(0));
                 //System.out.println("itemChange===="+item);
@@ -293,6 +315,8 @@ public class ItemSearchServiceImpl implements ItemSearchService {
         }
 
         map.put("rows",page.getContent());
+        map.put("totalPage",page.getTotalPages());
+        map.put("total",page.getTotalElements());
         return map;
     }
 }

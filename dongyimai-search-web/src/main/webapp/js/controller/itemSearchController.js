@@ -5,15 +5,66 @@ app.controller('itemSearchController',function($scope,itemSearchService){
             function(response){
                 //console.log(response);
                 $scope.entity = response;
+                $scope.setPageLabel();
             }
         )
     };
+
+    $scope.findByPageNo=function(pageNo){
+        if (pageNo>$scope.entity.totalPage){
+            return;
+        }
+        if(pageNo<1){
+            return;
+        }
+      $scope.searchMap.pageNo=pageNo;
+      $scope.search();
+    };
+
+
 
     $scope.searchMap={
         "category":'',
         "brand":'',
         'price':'',
+        'pageNo':1,
+        'pageSize':10,
         spec:{}
+    };
+
+    //设置分页栏
+
+/*  主要的原理是根据当前页码
+    确定第一页和最后一页
+    确定分页页码同时根据当前页面判断
+    前面的"..."和后面的是否显示
+*/
+    $scope.setPageLabel=function(){
+        $scope.pageLabel=[];
+        var firstPage=1;
+        var lastPage=$scope.entity.totalPage;
+        var maxPage=$scope.entity.totalPage;
+        $scope.firstDot=true;
+        $scope.lastDot=true;
+        if(maxPage>5){
+            if($scope.searchMap.pageNo<=3){
+                lastPage=5;
+                $scope.firstDot=false;
+            }else if($scope.searchMap.pageNo>=maxPage-2){
+                firstPage=maxPage-4;
+                $scope.lastDot=false;
+            }else {
+                firstPage=$scope.searchMap.pageNo-2;
+                lastPage=$scope.searchMap.pageNo+2;
+            }
+        }else {
+            $scope.firstDot=true;
+            $scope.lastDot=true;
+        }
+        for(var i=firstPage;i<=lastPage;i++){
+            $scope.pageLabel.push(i);
+        }
+
     };
 
     //添加到过滤栏
