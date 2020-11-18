@@ -1,6 +1,7 @@
 package com.offcn.sellergoods.service.impl;
 import java.util.List;
 
+import com.offcn.pojo.TbItem;
 import com.offcn.search.service.ItemCatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.dubbo.config.annotation.Service;
@@ -13,6 +14,8 @@ import com.offcn.pojo.TbItemCatExample.Criteria;
 
 
 import com.offcn.entity.PageResult;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.solr.core.SolrTemplate;
 
 /**
  * 商品类目服务实现层
@@ -24,6 +27,9 @@ public class ItemCatServiceImpl implements ItemCatService {
 
 	@Autowired
 	private TbItemCatMapper itemCatMapper;
+
+	@Autowired
+	private RedisTemplate redisTemplate;
 	
 	/**
 	 * 查询全部
@@ -104,6 +110,12 @@ public class ItemCatServiceImpl implements ItemCatService {
 		Criteria criteria = example.createCriteria();
 		criteria.andParentIdEqualTo(parentId);
 		List<TbItemCat> tbItemCats = itemCatMapper.selectByExample(example);
+
+		List<TbItemCat> itemCatList = findAll();
+		for(TbItemCat item:itemCatList){
+			redisTemplate.boundHashOps("itemCat").put(item.getName(),item.getTypeId());
+		}
+		System.out.println("储存ItemCat数据到redis中......");
 		return tbItemCats;
 	}
 

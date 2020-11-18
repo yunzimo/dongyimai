@@ -10,6 +10,7 @@
 
     <dubbo:protocol name="dubbo" port="20884"></dubbo:protocol>
     <dubbo:application name="dongyimai-search-service"/>
-    <dubbo:registry address="zookeeper://172.16.150.132:2181"/>
+    <dubbo:registry address="zookeeper://172.16.150.132:2181" />
     <dubbo:annotation package="com.offcn.search.service.impl" />
+
 </beans>

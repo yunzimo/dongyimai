@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.offcn.mapper.TbSpecificationOptionMapper;
 import com.offcn.pojo.TbSpecificationOption;
 import com.offcn.pojo.TbSpecificationOptionExample;
@@ -18,6 +19,7 @@ import com.offcn.pojo.TbTypeTemplateExample.Criteria;
 
 
 import com.offcn.entity.PageResult;
+import org.springframework.data.redis.core.RedisTemplate;
 
 /**
  * 类型模板服务实现层
@@ -31,6 +33,9 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
 	private TbTypeTemplateMapper typeTemplateMapper;
 	@Autowired
 	private TbSpecificationOptionMapper specificationOptionMapper;
+
+	@Autowired
+	private RedisTemplate redisTemplate;
 	
 	/**
 	 * 查询全部
@@ -88,7 +93,7 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
 	}
 	
 	
-		@Override
+	@Override
 	public PageResult findPage(TbTypeTemplate typeTemplate, int pageNum, int pageSize) {
 		PageHelper.startPage(pageNum, pageSize);
 		
@@ -106,14 +111,24 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
 				criteria.andCustomAttributeItemsLike("%"+typeTemplate.getCustomAttributeItems()+"%");
 			}	
 		}
-		
+
+
+		//添加数据到redis缓存
+		List<TbTypeTemplate> all = findAll();
+		for(TbTypeTemplate item:all){
+			List<Map> brandList = JSON.parseArray(item.getBrandIds(), Map.class);
+			List<Map> specList = getSpecList(item.getId());
+			redisTemplate.boundHashOps("brandList").put(item.getId(),brandList);
+			redisTemplate.boundHashOps("specList").put(item.getId(),specList);
+		}
+		System.out.println("储存typeTemplate数据到redis中......");
 		Page<TbTypeTemplate> page= (Page<TbTypeTemplate>)typeTemplateMapper.selectByExample(example);		
 		return new PageResult(page.getTotal(), page.getResult());
 	}
 
 	@Override
 	public List<Map> getSpecList(Long id) {
-		System.out.println("id======="+id);
+		//System.out.println("id======="+id);
 		TbTypeTemplate typeTemplate = typeTemplateMapper.selectByPrimaryKey(id);
 
 		String specIds = typeTemplate.getSpecIds();

@@ -2,18 +2,18 @@ package com.offcn.search.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 
-import com.alibaba.fastjson.JSON;
+
 import com.alibaba.fastjson.JSONObject;
 import com.offcn.pojo.TbItem;
 import com.offcn.search.service.ItemSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.data.solr.core.query.*;
 import org.springframework.data.solr.core.query.result.*;
 
 
-import javax.swing.text.Highlighter;
 import java.util.*;
 
 @Service
@@ -22,13 +22,31 @@ public class ItemSearchServiceImpl implements ItemSearchService {
     @Autowired
     private SolrTemplate solrTemplate;
 
+    @Autowired
+    private RedisTemplate redisTemplate;
+
     @Override
     public Map<String, Object> search(Map searchMap) {
         Map<String, Object> map=new HashMap<>();
         map=getItemList(searchMap);
         List list = getCategoryList(searchMap);
         map.put("categoryList",list);
+        if(list!=null&&list.size()>0){
+            Map brandAndSpecList = getBrandAndSpecList((String) list.get(0));
+            map.putAll(brandAndSpecList);
+        }
         return map;
+    }
+
+    private Map getBrandAndSpecList(String category){
+        Map map=new HashMap();
+        Long typeId = (Long) redisTemplate.boundHashOps("itemCat").get(category);
+        List<Map> brandList = (List<Map>) redisTemplate.boundHashOps("brandList").get(typeId);
+        List<Map> specList = (List<Map>) redisTemplate.boundHashOps("specList").get(typeId);
+        map.put("brandList",brandList);
+        map.put("specList",specList);
+        return map;
+
     }
 
     private List getCategoryList(Map searchMap) {
@@ -44,8 +62,84 @@ public class ItemSearchServiceImpl implements ItemSearchService {
 
         //分组分页对象
         GroupPage<TbItem> page = solrTemplate.queryForGroupPage(query, TbItem.class);
+
         //分组结果集
         GroupResult<TbItem> groupResult = page.getGroupResult("item_category");
+        System.out.println("GroupResult===="+JSONObject.toJSONString(groupResult));
+
+/*        {
+            "groupEntries":{
+            "content":[
+            {
+                "groupValue":"手机",
+                    "result":{
+                "content":[
+                {
+                    "brand":"三星",
+                        "category":"手机",
+                        "goodsId":1,
+                        "id":1109730,
+                        "image":"http://img10.360buyimg.com/n1/s450x450_jfs/t3457/294/236823024/102048/c97f5825/58072422Ndd7e66c4.jpg",
+                        "price":115,
+                        "specMap":{
+                    "网络":"双卡",
+                            "机身内存":"32G"
+                },
+                    "title":"三星 E1200R 黑色 移动联通2G",
+                        "updateTime":1425821281000
+                }
+                    ],
+                "first":true,
+                        "last":true,
+                        "number":0,
+                        "numberOfElements":1,
+                        "size":0,
+                        "totalElements":135,
+                        "totalPages":1
+            }
+            },
+            {
+                "groupValue":"平板电视",
+                    "result":{
+                "content":[
+                {
+                    "brand":"三星",
+                        "category":"平板电视",
+                        "goodsId":1,
+                        "id":1093051,
+                        "image":"http://img10.360buyimg.com/n1/s450x450_jfs/t3457/294/236823024/102048/c97f5825/58072422Ndd7e66c4.jpg",
+                        "price":7099,
+                        "specMap":{
+                    "电视屏幕尺寸":"50英寸"
+                },
+                    "title":"三星(SAMSUNG) UA50HU7000J 50英寸UHD 4K超高清智能电视",
+                        "updateTime":1425821265000
+                }
+                    ],
+                "first":true,
+                        "last":true,
+                        "number":0,
+                        "numberOfElements":1,
+                        "size":0,
+                        "totalElements":13,
+                        "totalPages":1
+            }
+            }
+        ],
+            "first":true,
+                    "last":true,
+                    "number":0,
+                    "numberOfElements":2,
+                    "size":0,
+                    "totalElements":2,
+                    "totalPages":1
+        },
+            "matches":148,
+                "name":"item_category"
+        }*/
+
+
+
         //分组入口对象，去重复
         Page<GroupEntry<TbItem>> groupEntries = groupResult.getGroupEntries();
         //分组集合
@@ -73,6 +167,78 @@ public class ItemSearchServiceImpl implements ItemSearchService {
         //显示效果为img/page-json.png
         System.out.println("page===="+JSONObject.toJSONString(page));
 
+/*        {
+            "allFacets":[
+            null
+    ],
+            "content":[
+
+            {
+                "brand":"三星",
+                    "category":"手机",
+                    "goodsId":1,
+                    "id":691300,
+                    "image":"http://img10.360buyimg.com/n1/s450x450_jfs/t3457/294/236823024/102048/c97f5825/58072422Ndd7e66c4.jpg",
+                    "price":4399,
+                    "specMap":{
+                "网络":"联通3G",
+                        "机身内存":"16G"
+            },
+                "title":"三星 B9120 钛灰色 联通3G手机 双卡双待双通",
+                    "updateTime":1425821367000
+            },
+            {
+                "brand":"三星",
+                    "category":"手机",
+                    "goodsId":1,
+                    "id":738388,
+                    "image":"http://img10.360buyimg.com/n1/s450x450_jfs/t3457/294/236823024/102048/c97f5825/58072422Ndd7e66c4.jpg",
+                    "price":1699,
+                    "specMap":{
+                "网络":"联通3G",
+                        "机身内存":"16G"
+            },
+                "title":"三星 Note II (N7100) 云石白 联通3G手机",
+                    "updateTime":1425821296000
+            },
+
+                "highlighted":[
+            {
+                "entity":{
+                "$ref":"$.content[0]"
+            },
+                "highlights":[
+                {
+                    "field":{
+                    "name":"item_title"
+                },
+                    "snipplets":[
+                    "<span style='color:red;'>三星</span> E1200R 黑色 移动联通2G"
+                    ]
+                }
+            ]
+            },
+            {
+                "entity":{
+                "$ref":"$.content[1]"
+            },
+                "highlights":[
+                {
+                    "field":{
+                    "name":"item_title"
+                },
+                    "snipplets":[
+                    "<span style='color:red;'>三星</span> G3608 白色 移动4G手机"
+                    ]
+                }
+            ]
+            },
+
+
+
+    ]
+        }*/
+
 
         //高亮入口对象
         for (HighlightEntry<TbItem> entry : page.getHighlighted()) {
@@ -83,13 +249,6 @@ public class ItemSearchServiceImpl implements ItemSearchService {
 
 
 
-/*            List<HighlightEntry.Highlight> highlightList = entry.getHighlights();
-            for(HighlightEntry.Highlight highlight:highlightList){
-                List<String> snipplets = highlight.getSnipplets();
-                for(String s:snipplets){
-                    System.out.println(s);
-                }
-            }*/
 
             if (entry.getHighlights().size() > 0 && entry.getHighlights().get(0).getSnipplets().size()>0){
                 item.setTitle(entry.getHighlights().get(0).getSnipplets().get(0));

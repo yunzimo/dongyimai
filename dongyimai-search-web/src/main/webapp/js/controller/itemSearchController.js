@@ -7,5 +7,6 @@ app.controller('itemSearchController',function($scope,itemSearchService){
                 $scope.entity = response;
             }
         )
-    }
+    };
+
 })
