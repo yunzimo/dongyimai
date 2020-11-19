@@ -21,6 +21,15 @@ app.controller('itemSearchController',function($scope,itemSearchService){
       $scope.search();
     };
 
+    //排序
+    $scope.findBySort=function(sortField,sortValue){
+        $scope.searchMap.sortField=sortField;
+        $scope.searchMap.sortValue=sortValue;
+        $scope.search();
+    };
+
+
+
 
 
     $scope.searchMap={
@@ -29,6 +38,8 @@ app.controller('itemSearchController',function($scope,itemSearchService){
         'price':'',
         'pageNo':1,
         'pageSize':10,
+        'sortField':'',
+        'sortValue':'',
         spec:{}
     };
 

@@ -9,6 +9,9 @@ import com.offcn.pojo.TbItem;
 import com.offcn.search.service.ItemSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+
+
+import org.springframework.data.domain.Sort;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.data.solr.core.query.*;
@@ -196,6 +199,22 @@ public class ItemSearchServiceImpl implements ItemSearchService {
                 query.addCriteria(criteria);
             }
         }
+
+        //设置排序
+
+        String sortField= (String) searchMap.get("sortField");
+        String sortValue= (String) searchMap.get("sortValue");
+        if(!"".equals(sortField)&&sortField!=null){
+            Sort sort=null;
+            if("asc".equals(sortValue)){
+               sort=new Sort(Sort.Direction.ASC,"item_"+sortField);
+            }else {
+                sort=new Sort(Sort.Direction.DESC,"item_"+sortField);
+
+            }
+            query.addSort(sort);
+        }
+
 
         //设置分页
         Integer pageNo=null;
