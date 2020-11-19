@@ -141,8 +141,11 @@ public class GoodsServiceImpl implements GoodsService {
      */
     @Override
     public void update(Goods goods) {
+        TbGoods goods1 = goods.getGoods();
+        goods1.setAuditStatus("0");
+        goods1.setIsMarketable(null);
         goodsDescMapper.updateByPrimaryKey(goods.getGoodsDesc());
-        goodsMapper.updateByPrimaryKey(goods.getGoods());
+        goodsMapper.updateByPrimaryKey(goods1);
 
         TbItemExample example=new TbItemExample();
         TbItemExample.Criteria criteria = example.createCriteria();
@@ -244,8 +247,10 @@ public class GoodsServiceImpl implements GoodsService {
     public void updateMarket(Long[] ids, String market) {
         for(Long id:ids){
             TbGoods goods = goodsMapper.selectByPrimaryKey(id);
-            goods.setIsMarketable(market);
-            goodsMapper.updateByPrimaryKey(goods);
+            if("1".equals(goods.getAuditStatus())){
+                goods.setIsMarketable(market);
+                goodsMapper.updateByPrimaryKey(goods);
+            }
         }
     }
 

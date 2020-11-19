@@ -102,6 +102,11 @@
       <artifactId>dongyimai-sellergoods-interface</artifactId>
       <version>1.0</version>
     </dependency>
+    <dependency>
+      <groupId>com.offcn</groupId>
+      <artifactId>dongyimai-search-interface</artifactId>
+      <version>1.0</version>
+    </dependency>
 
     <dependency>
       <groupId>org.springframework.security</groupId>

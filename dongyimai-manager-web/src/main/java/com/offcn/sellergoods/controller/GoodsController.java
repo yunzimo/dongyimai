@@ -2,7 +2,10 @@ package com.offcn.sellergoods.controller;
 import java.util.List;
 
 import com.offcn.entity.Goods;
+import com.offcn.pojo.TbItem;
 import com.offcn.search.service.GoodsService;
+import com.offcn.search.service.ItemSearchService;
+import com.offcn.search.service.ItemService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +26,11 @@ public class GoodsController {
 
 	@Reference
 	private GoodsService goodsService;
+
+	@Reference
+	private ItemSearchService itemSearchService;
+	@Reference
+	private ItemService itemService;
 	
 	/**
 	 * 返回全部列表
@@ -119,6 +127,14 @@ public class GoodsController {
 
 		try {
 			goodsService.updateStatus(ids,status);
+
+			//如果更新状态为审核通过添加所有商品到solr库
+			if("1".equals(status)){
+				List<TbItem> itemList = itemService.findByGoodsId(ids);
+				if(itemList!=null&&itemList.size()>0){
+					itemSearchService.importData(itemList);
+				}
+			}
 			return new Result(true, "更新状态成功");
 		} catch (Exception e) {
 			e.printStackTrace();

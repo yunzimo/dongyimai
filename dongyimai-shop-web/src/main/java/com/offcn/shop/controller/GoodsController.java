@@ -2,7 +2,10 @@ package com.offcn.shop.controller;
 import java.util.List;
 
 import com.offcn.entity.Goods;
+import com.offcn.pojo.TbItem;
 import com.offcn.search.service.GoodsService;
+import com.offcn.search.service.ItemSearchService;
+import com.offcn.search.service.ItemService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +28,11 @@ public class GoodsController {
 
 	@Reference
 	private GoodsService goodsService;
+	@Reference
+	private ItemSearchService itemSearchService;
+
+	@Reference
+	private ItemService itemService;
 	
 	/**
 	 * 返回全部列表
@@ -99,6 +107,13 @@ public class GoodsController {
 	public Result delete(Long [] ids){
 		try {
 			goodsService.updateDelete(ids);
+			//把所有的sku的状态置0
+			List<TbItem> itemList = itemService.findByGoodsId(ids);
+			for(TbItem item:itemList){
+				item.setStatus("0");
+				itemService.update(item);
+			}
+			itemSearchService.deleteData(ids);
 			return new Result(true, "删除成功"); 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -122,11 +137,16 @@ public class GoodsController {
 	@RequestMapping("/updateMarket")
 	public Result updateMarket(Long[] ids,String market){
 		try {
-
 			if(market.equals("undefined")){
 				market=null;
 			}
 			goodsService.updateMarket(ids,market);
+/*			//market==null是下架，反之是上架
+			if(market==null){
+				itemSearchService.deleteData(ids);
+			}else{
+				itemSearchService.importData(itemService.findByGoodsId(ids));
+			}*/
 			return new Result(true, "状态更新成功成功");
 		} catch (Exception e) {
 			e.printStackTrace();

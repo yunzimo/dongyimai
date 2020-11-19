@@ -1,4 +1,5 @@
 package com.offcn.sellergoods.service.impl;
+import java.util.Arrays;
 import java.util.List;
 
 import com.offcn.search.service.ItemService;
@@ -121,5 +122,27 @@ public class ItemServiceImpl implements ItemService {
 		Page<TbItem> page= (Page<TbItem>)itemMapper.selectByExample(example);		
 		return new PageResult(page.getTotal(), page.getResult());
 	}
-	
+
+	@Override
+	public List<TbItem> findByGoodsId(Long[] ids) {
+/*		List<TbItem> list=null;
+		for(Long id:ids){
+			TbItemExample example=new TbItemExample();
+			Criteria criteria = example.createCriteria();
+			criteria.andGoodsIdEqualTo(id);
+			criteria.andStatusEqualTo("1");
+			List<TbItem> itemList = itemMapper.selectByExample(example);
+			list.addAll(itemList);
+		}
+		return list;*/
+		TbItemExample example=new TbItemExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andGoodsIdIn(Arrays.asList(ids));
+		criteria.andStatusEqualTo("1");
+		List<TbItem> itemList = itemMapper.selectByExample(example);
+		return itemList;
+	}
+
+
+
 }

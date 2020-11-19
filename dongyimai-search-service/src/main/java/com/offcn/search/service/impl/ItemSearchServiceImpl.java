@@ -3,6 +3,7 @@ package com.offcn.search.service.impl;
 import com.alibaba.dubbo.config.annotation.Service;
 
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.offcn.pojo.TbItem;
 
@@ -337,5 +338,31 @@ public class ItemSearchServiceImpl implements ItemSearchService {
         map.put("totalPage",page.getTotalPages());
         map.put("total",page.getTotalElements());
         return map;
+    }
+
+
+    @Override
+    public void importData(List<TbItem> list) {
+            //添加
+            if(list!=null&&list.size()>0){
+                for(TbItem item:list){
+                    Map map = JSON.parseObject(item.getSpec(), Map.class);
+                    item.setSpecMap(map);
+                }
+                solrTemplate.saveBeans(list);
+                solrTemplate.commit();
+                System.out.println("数据插入solr库");
+            }
+    }
+
+    @Override
+    public void deleteData(Long[] ids) {
+        Query query=new SimpleQuery();
+        Criteria criteria=new Criteria("item_goodsid");
+        criteria.in(Arrays.asList(ids));
+        query.addCriteria(criteria);
+        solrTemplate.delete(query);
+        solrTemplate.commit();
+        System.out.println("清除数据完成");
     }
 }
