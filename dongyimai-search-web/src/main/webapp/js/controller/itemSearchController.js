@@ -1,4 +1,4 @@
-app.controller('itemSearchController',function($scope,itemSearchService){
+app.controller('itemSearchController',function($scope,$location,itemSearchService){
 
     $scope.search = function(){
         itemSearchService.search($scope.searchMap).success(
@@ -8,6 +8,14 @@ app.controller('itemSearchController',function($scope,itemSearchService){
                 $scope.setPageLabel();
             }
         )
+    };
+
+    $scope.loadKeywords=function(){
+        var keywords=$location.search()['keywords'];
+        if(keywords!=null&&keywords!=''){
+            $scope.searchMap.keywords=keywords;
+            $scope.search();
+        }
     };
 
     $scope.findByPageNo=function(pageNo){
@@ -28,7 +36,17 @@ app.controller('itemSearchController',function($scope,itemSearchService){
         $scope.search();
     };
 
-
+    //关键词检查
+    $scope.keywordCheck=function(){
+        if($scope.entity.brandList!=null){
+            for(var i=0;i<$scope.entity.brandList.length;i++){
+                if($scope.searchMap.keywords.indexOf($scope.entity.brandList[i].text)>=0){
+                    return true;
+                }
+            }
+        }
+        return false;
+    };
 
 
 

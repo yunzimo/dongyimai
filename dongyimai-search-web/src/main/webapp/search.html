@@ -24,7 +24,7 @@
 
 	</head>
 
-	<body ng-app="dongyimai" ng-controller="itemSearchController">
+	<body ng-app="dongyimai" ng-controller="itemSearchController" ng-init="loadKeywords()">
 		<!-- 头部栏位 -->
 		<!--页面顶部-->
 		<div id="nav-bottom">
@@ -183,7 +183,7 @@
 					</div>
 					<div class="fl ext"></div>
 				</div>
-				<div class="type-wrap logo" ng-if="entity.brandList!=null&&searchMap['brand']==''">
+				<div class="type-wrap logo" ng-if="entity.brandList!=null&&searchMap['brand']==''&&! keywordCheck()">
 					<div class="fl key brand">品牌</div>
 					<div class="value logos">
 						<ul class="logo-list">
