@@ -2,6 +2,7 @@ package com.offcn.sellergoods.controller;
 import java.util.List;
 
 import com.offcn.entity.Goods;
+import com.offcn.page.service.ItemPageService;
 import com.offcn.pojo.TbItem;
 import com.offcn.search.service.GoodsService;
 import com.offcn.search.service.ItemSearchService;
@@ -31,6 +32,9 @@ public class GoodsController {
 	private ItemSearchService itemSearchService;
 	@Reference
 	private ItemService itemService;
+
+	@Reference(timeout = 30000)//设置超时时间
+	private ItemPageService itemPageService;
 	
 	/**
 	 * 返回全部列表
@@ -142,5 +146,15 @@ public class GoodsController {
 		}
 	}
 
+	//生成页面
+	@RequestMapping("/genHtml")
+	public void genHtml(Long goodsId){
+		boolean b = itemPageService.genHtml(goodsId);
+		if(b){
+			System.out.println("生成页面成功");
+		}else {
+			System.out.println("生成页面失败");
+		}
+	}
 	
 }

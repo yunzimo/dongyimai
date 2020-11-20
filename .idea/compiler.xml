@@ -14,11 +14,13 @@
         <module name="dongyimaicontentinterface" />
         <module name="dongyimai-solr-util" />
         <module name="dongyimaicontentservice" />
+        <module name="dongyimai-search-interface" />
+        <module name="dongyimai-page-interface" />
         <module name="dongyimai-shop-web" />
         <module name="dongyimai-sellergoods-interface" />
-        <module name="dongyimai-manager-web" />
+        <module name="dongyimai-page-service" />
         <module name="dongyimai-dao" />
-        <module name="dongyimai-search-interface" />
+        <module name="dongyimai-manager-web" />
         <module name="dongyimai-sellergoods-service" />
       </profile>
     </annotationProcessing>
