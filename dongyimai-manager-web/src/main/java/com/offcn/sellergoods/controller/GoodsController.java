@@ -138,6 +138,15 @@ public class GoodsController {
 				if(itemList!=null&&itemList.size()>0){
 					itemSearchService.importData(itemList);
 				}
+				//生成页面
+				for(Long id:ids){
+					boolean b = itemPageService.genHtml(id);
+					if(b){
+						System.out.println(id+"页面生成成功");
+					}else {
+						System.out.println(id+"页面生成失败");
+					}
+				}
 			}
 			return new Result(true, "更新状态成功");
 		} catch (Exception e) {
@@ -146,15 +155,6 @@ public class GoodsController {
 		}
 	}
 
-	//生成页面
-	@RequestMapping("/genHtml")
-	public void genHtml(Long goodsId){
-		boolean b = itemPageService.genHtml(goodsId);
-		if(b){
-			System.out.println("生成页面成功");
-		}else {
-			System.out.println("生成页面失败");
-		}
-	}
+
 	
 }

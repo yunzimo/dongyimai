@@ -21,6 +21,7 @@
       <module>dongyimai-solr-util</module>
       <module>dongyimai-page-interface</module>
     <module>dongyimai-page-service</module>
+      <module>dongyimai-page-web</module>
 
   </modules>
 

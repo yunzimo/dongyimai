@@ -31,7 +31,7 @@ public class GoodsController {
 	@Reference
 	private ItemSearchService itemSearchService;
 
-	@Reference
+	@Reference(timeout = 300000)
 	private ItemService itemService;
 	
 	/**
