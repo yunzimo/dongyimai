@@ -11,9 +11,4 @@
         <property name="defaultEncoding" value="utf-8"/>
     </bean>
 
-<!--    dubbo-->
-    <dubbo:protocol name="dubbo" port="20885"/>
-    <dubbo:application name="dongyimai-page-service"/>
-    <dubbo:registry address="zookeeper://172.16.150.132:2181"/>
-    <dubbo:annotation package="com.offcn.page.Impl"/>
 </beans>

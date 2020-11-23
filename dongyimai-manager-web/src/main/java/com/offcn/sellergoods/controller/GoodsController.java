@@ -48,10 +48,10 @@ public class GoodsController {
 	private Destination queueSolrDestinationDelete;
 
 	@Autowired
-    private Destination queuePageDestination;
+    private Destination topicPageDestination;
 
 	@Autowired
-	private Destination queuePageDestinationDelete;
+	private Destination topicPageDestinationDelete;
 
 
 	@Reference
@@ -155,7 +155,7 @@ public class GoodsController {
 				}
 			});
 			for(final Long id:ids){
-				jmsTemplate.send(queuePageDestinationDelete, new MessageCreator() {
+				jmsTemplate.send(topicPageDestinationDelete, new MessageCreator() {
 					@Override
 					public Message createMessage(Session session) throws JMSException {
 						return session.createTextMessage(String.valueOf(id));
@@ -209,7 +209,7 @@ public class GoodsController {
 					}else {
 						System.out.println(id+"页面生成失败");
 					}*/
-                    jmsTemplate.send(queuePageDestination, new MessageCreator() {
+                    jmsTemplate.send(topicPageDestination, new MessageCreator() {
                         @Override
                         public Message createMessage(Session session) throws JMSException {
                             return session.createTextMessage(String.valueOf(id));
