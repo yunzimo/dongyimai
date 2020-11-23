@@ -85,4 +85,17 @@ public class ItemPageServiceImp implements ItemPageService {
             return false;
         }
     }
+
+    @Override
+    public boolean DeleHtml(Long goodsId) {
+        File file=new File(FILE_DIR+goodsId+".html");
+        try {
+            return file.delete();
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        //System.out.println();
+
+    }
 }

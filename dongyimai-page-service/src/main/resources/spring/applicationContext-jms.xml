@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+
+    <!-- 真正可以产生Connection的ConnectionFactory，由对应的的JMS服务厂商提供 -->
+    <bean id="targetConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <property name="brokerURL"  value="tcp://172.16.150.132:61616"/>
+    </bean>
+
+    <!-- Spring用于管理真正的ConnectionFactory的ConnectionFactory -->
+    <bean id="jmsconnectionFactory" class="org.springframework.jms.connection.SingleConnectionFactory">
+        <!-- 目标ConnectionFactory对应真实的可以产生JMS Connection的ConnectionFactory -->
+        <property name="targetConnectionFactory" ref="targetConnectionFactory"/>
+    </bean>
+
+
+    <!-- 这个是队列目的地，点对点 -->
+    <bean id="topicPageDestination" class="org.apache.activemq.command.ActiveMQTopic">
+        <constructor-arg value="dongyimai_topic_page"/>
+    </bean>
+
+    <bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="destination" ref="topicPageDestination"/>
+        <property name="connectionFactory" ref="jmsconnectionFactory"/>
+        <property name="messageListener" ref="itemPageListener"/>
+    </bean>
+
+    <bean id="topicPageDestinationDelete" class="org.apache.activemq.command.ActiveMQTopic">
+        <constructor-arg value="dongyimai_topic_page_delete"/>
+    </bean>
+
+    <bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="destination" ref="topicPageDestinationDelete"/>
+        <property name="connectionFactory" ref="jmsconnectionFactory"/>
+        <property name="messageListener" ref="itemPageDeleteListener"/>
+    </bean>
+
+
+</beans>

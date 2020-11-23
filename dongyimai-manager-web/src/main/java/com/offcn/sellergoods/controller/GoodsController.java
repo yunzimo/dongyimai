@@ -1,12 +1,16 @@
 package com.offcn.sellergoods.controller;
 import java.util.List;
 
+import com.alibaba.fastjson.JSON;
 import com.offcn.entity.Goods;
-import com.offcn.page.service.ItemPageService;
+
 import com.offcn.pojo.TbItem;
 import com.offcn.search.service.GoodsService;
-import com.offcn.search.service.ItemSearchService;
+
 import com.offcn.search.service.ItemService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +20,9 @@ import com.offcn.pojo.TbGoods;
 
 import com.offcn.entity.PageResult;
 import com.offcn.entity.Result;
+
+import javax.jms.*;
+
 /**
  * 商品controller
  * @author Administrator
@@ -28,13 +35,30 @@ public class GoodsController {
 	@Reference
 	private GoodsService goodsService;
 
-	@Reference
-	private ItemSearchService itemSearchService;
+/*	@Reference
+	private ItemSearchService itemSearchService;*/
+
+	@Autowired
+	private JmsTemplate jmsTemplate;
+
+	@Autowired
+	private Destination queueSolrDestination;
+
+	@Autowired
+	private Destination queueSolrDestinationDelete;
+
+	@Autowired
+    private Destination queuePageDestination;
+
+	@Autowired
+	private Destination queuePageDestinationDelete;
+
+
 	@Reference
 	private ItemService itemService;
 
-	@Reference(timeout = 30000)//设置超时时间
-	private ItemPageService itemPageService;
+/*	@Reference(timeout = 30000)//设置超时时间
+	private ItemPageService itemPageService;*/
 	
 	/**
 	 * 返回全部列表
@@ -102,11 +126,43 @@ public class GoodsController {
 	 * @param ids
 	 * @return
 	 */
-	@RequestMapping("/delete")
+/*	@RequestMapping("/delete")
 	public Result delete(Long [] ids){
 		try {
 			goodsService.updateDelete(ids);
 			return new Result(true, "删除成功"); 
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new Result(false, "删除失败");
+		}
+	}*/
+
+	@RequestMapping("/delete")
+	public Result delete(final Long [] ids){
+		try {
+			goodsService.updateDelete(ids);
+			//把所有的sku的状态置0
+			List<TbItem> itemList = itemService.findByGoodsId(ids);
+			for(TbItem item:itemList){
+				item.setStatus("0");
+				itemService.update(item);
+			}
+			//itemSearchService.deleteData(ids);
+			jmsTemplate.send(queueSolrDestinationDelete, new MessageCreator() {
+				@Override
+				public Message createMessage(Session session) throws JMSException {
+					return session.createObjectMessage(ids);
+				}
+			});
+			for(final Long id:ids){
+				jmsTemplate.send(queuePageDestinationDelete, new MessageCreator() {
+					@Override
+					public Message createMessage(Session session) throws JMSException {
+						return session.createTextMessage(String.valueOf(id));
+					}
+				});
+			}
+			return new Result(true, "删除成功");
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new Result(false, "删除失败");
@@ -134,18 +190,31 @@ public class GoodsController {
 
 			//如果更新状态为审核通过添加所有商品到solr库
 			if("1".equals(status)){
-				List<TbItem> itemList = itemService.findByGoodsId(ids);
+				final List<TbItem> itemList = itemService.findByGoodsId(ids);
 				if(itemList!=null&&itemList.size()>0){
-					itemSearchService.importData(itemList);
+					//itemSearchService.importData(itemList);
+					jmsTemplate.send(queueSolrDestination, new MessageCreator() {
+						@Override
+						public Message createMessage(Session session) throws JMSException {
+							return session.createTextMessage(JSON.toJSONString(itemList));
+						}
+					});
+
 				}
 				//生成页面
-				for(Long id:ids){
-					boolean b = itemPageService.genHtml(id);
+				for(final Long id:ids){
+/*					boolean b = itemPageService.genHtml(id);
 					if(b){
 						System.out.println(id+"页面生成成功");
 					}else {
 						System.out.println(id+"页面生成失败");
-					}
+					}*/
+                    jmsTemplate.send(queuePageDestination, new MessageCreator() {
+                        @Override
+                        public Message createMessage(Session session) throws JMSException {
+                            return session.createTextMessage(String.valueOf(id));
+                        }
+                    });
 				}
 			}
 			return new Result(true, "更新状态成功");

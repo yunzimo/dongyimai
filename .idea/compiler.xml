@@ -15,6 +15,7 @@
         <module name="dongyimai-solr-util" />
         <module name="dongyimaicontentservice" />
         <module name="dongyimai-search-interface" />
+        <module name="dongyimai-sms-service" />
         <module name="dongyimai-page-web" />
         <module name="dongyimai-page-interface" />
         <module name="dongyimai-shop-web" />
