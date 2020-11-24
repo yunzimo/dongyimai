@@ -12,6 +12,8 @@
     <file type="web" url="file://$PROJECT_DIR$/dongyimai-sellergoods-service" />
     <file type="web" url="file://$PROJECT_DIR$/dongyimai-shop-web" />
     <file type="web" url="file://$PROJECT_DIR$/dongyimai-sms-service" />
+    <file type="web" url="file://$PROJECT_DIR$/dongyimai-user-service" />
+    <file type="web" url="file://$PROJECT_DIR$/dongyimai-user-web" />
     <type id="Spring" />
   </component>
   <component name="JavaScriptSettings">
@@ -25,6 +27,10 @@
         <option value="$PROJECT_DIR$/dongyimai-search-service/pom.xml" />
         <option value="$PROJECT_DIR$/dongyimai-search-web/pom.xml" />
         <option value="$PROJECT_DIR$/dongyimai-sms-service/pom.xml" />
+        <option value="$PROJECT_DIR$/dongyimai-userinter-face/pom.xml" />
+        <option value="$PROJECT_DIR$/dongyimai-user-service/pom.xml" />
+        <option value="$PROJECT_DIR$/dongyimai-user-web/pom.xml" />
+        <option value="$PROJECT_DIR$/dongyimai-user-interface/pom.xml" />
       </list>
     </option>
   </component>

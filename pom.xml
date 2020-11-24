@@ -22,6 +22,9 @@
       <module>dongyimai-page-interface</module>
     <module>dongyimai-page-service</module>
       <module>dongyimai-page-web</module>
+      <module>dongyimai-user-interface</module>
+      <module>dongyimai-user-service</module>
+      <module>dongyimai-user-web</module>
 
   </modules>
 

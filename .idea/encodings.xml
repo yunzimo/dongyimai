@@ -20,5 +20,8 @@
     <file url="file://$PROJECT_DIR$/dongyimai-shop-web" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dongyimai-sms-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dongyimai-solr-util" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dongyimai-user-interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dongyimai-user-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dongyimai-user-web" charset="UTF-8" />
   </component>
 </project>
