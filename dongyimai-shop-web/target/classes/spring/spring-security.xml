@@ -62,7 +62,7 @@
     interface：该服务对应的接口
     id：接口唯一标示
     -->
-    <dubbo:reference interface="com.offcn.service.SellerService" id="sellerService"/>
+    <dubbo:reference interface="com.offcn.search.service.SellerService" id="sellerService"/>
 
 
 </beans:beans>

@@ -15,11 +15,11 @@ app.service('goodsService',function($http){
 	}
 	//增加 
 	this.add=function(entity){
-		return  $http.post('../goods/add.do',entity );
+		return  $http.post('../goods/add.do',entity);
 	}
-	//修改 
+	//修改
 	this.update=function(entity){
-		return  $http.post('../goods/update.do',entity );
+		return  $http.post('../goods/update.do',entity);
 	}
 	//删除
 	this.dele=function(ids){
@@ -31,5 +31,10 @@ app.service('goodsService',function($http){
 	};
 	this.findByParentId=function (parentId) {
 		return $http.post('../itemCat/findByParentId.do?parentId='+parentId);
-	}
+	};
+	this.updateMarket=function (ids,market) {
+		return $http.post('../goods/updateMarket.do?ids='+ids+"&&market="+market);
+	};
+
+
 });

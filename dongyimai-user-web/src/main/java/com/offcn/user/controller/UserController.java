@@ -3,6 +3,8 @@ import java.util.Date;
 import java.util.List;
 
 import com.offcn.user.service.UserService;
+
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -61,6 +63,10 @@ public class UserController {
 				try{
 					user.setCreated(new Date());
 					user.setUpdated(new Date());
+
+					//md5加密
+					String password = DigestUtils.md5Hex(user.getPassword());
+					user.setPassword(password);
 					userService.add(user);
 					return new Result(true,"注册成功");
 				}catch (Exception e){
